@@ -1,0 +1,11 @@
+Model Information:
+* title:	SPACESHIP - CB2
+* source:	https://sketchfab.com/3d-models/spaceship-cb2-b9708d29e85746c891b48075a8a1e70a
+* author:	Lezalit (https://sketchfab.com/Lezalit)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "SPACESHIP - CB2" (https://sketchfab.com/3d-models/spaceship-cb2-b9708d29e85746c891b48075a8a1e70a) by Lezalit (https://sketchfab.com/Lezalit) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
