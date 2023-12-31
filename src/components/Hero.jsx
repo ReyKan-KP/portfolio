@@ -4,8 +4,6 @@ import { ComputersCanvas } from "./canvas";
 import "./ParallaxStar.css";
 import "./SocialMedia.css";
 import "font-awesome/css/font-awesome.min.css";
-// import {cv} from '../assets'
-// import { SocialMedia } from "./SocialMedia";
 
 const Hero = () => {
   return (
@@ -52,7 +50,6 @@ const Hero = () => {
                 {" "}
                 Full-Stack Developer
               </span>
-              {/* <SocialMedia /> */}
             </p>
             <br />
             <div className="mainSocial">
