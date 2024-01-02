@@ -54,11 +54,11 @@ const services = [
 const technologies = [
   {
     name: "HTML 5",
-    icon: html,
+    icon: "https://iili.io/J5RxpFj.png",
   },
   {
     name: "CSS 3",
-    icon: css,
+    icon: "https://iili.io/J5RzIAN.png",
   },
   {
     name: "JavaScript",
@@ -70,7 +70,7 @@ const technologies = [
   // },
   {
     name: "React JS",
-    icon: reactjs,
+    icon: "https://iili.io/J5RI3J4.png",
   },
   {
     name: "Redux",
@@ -78,7 +78,7 @@ const technologies = [
   },
   {
     name: "Node JS",
-    icon: nodejs,
+    icon: "https://iili.io/J5RInse.png",
   },
   {
     name: "Three JS",
@@ -86,7 +86,7 @@ const technologies = [
   },
   {
     name: "Express JS",
-    icon: "https://cdn.icon-icons.com/icons2/2699/PNG/512/expressjs_logo_icon_169185.png",
+    icon: "https://iili.io/J5RI5mB.png",
   },
   {
     name: "EJS",
@@ -110,11 +110,11 @@ const technologies = [
   },
   {
     name: "git",
-    icon: git,
+    icon: "https://iili.io/J5RIWep.png",
   },
   {
     name: "Tailwind CSS",
-    icon: tailwind,
+    icon: "https://iili.io/J5RIvrG.png",
   },
   {
     name: "Bootstrap",
