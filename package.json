@@ -1,5 +1,5 @@
 {
-  "name": "ReyKan_Porfolio",
+  "name": "3dfollio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -20,10 +20,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-parallax-tilt": "^1.7.180",
     "react-router-dom": "^6.8.2",
-    "react-parallax-tilt": "^1.7.172",
+    "react-tilt": "^0.1.4",
     "react-vertical-timeline-component": "^3.6.0",
-    "three": "^0.160.0"
+    "three": "^0.150.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
