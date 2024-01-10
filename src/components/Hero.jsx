@@ -74,7 +74,7 @@ const Hero = () => {
                 </li>
                 <li className="itemSocial">
                   <a
-                    href="https://drive.google.com/file/d/1P8xWoxhW5Z-ZcDCzrD2aFozQpViFRGOe/view?usp=sharing"
+                    href="https://drive.google.com/file/d/1S9qt6wq8bry_k7oWNdGRs0h-gNGXJGBF/view?usp=sharing"
                     download="KanishakaPranjal_Resume.pdf"
                     target="_blank"
                   >
