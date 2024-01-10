@@ -48,10 +48,6 @@ Welcome to the Vite React 3D Portfolio project! This is a modern and lightweight
    ```
 
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - This project was built using Vite, React, and Three.js. Special thanks to the respective communities for their excellent documentation and support.
