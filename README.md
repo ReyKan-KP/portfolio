@@ -1,4 +1,4 @@
-# React 3D Portfolio
+# Portfolio
 
 [![Image Alt Text](https://iili.io/J7iVGcl.png)](https://portfolio-kanishaka-pranjal.vercel.app/)
 
@@ -47,11 +47,5 @@ Welcome to the Vite React 3D Portfolio project! This is a modern and lightweight
    npm run deploy
    ```
 
-
-## Acknowledgments
-
-- This project was built using Vite, React, and Three.js. Special thanks to the respective communities for their excellent documentation and support.
-
-Feel free to reach out if you have any questions or suggestions. Happy coding!
 
 
