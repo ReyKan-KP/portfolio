@@ -149,7 +149,7 @@
 .text-aliceblue {
   font-size: clamp(16px, 4vw, 24px); /* Adjust the values as needed */
 }
-.gradient-text2{
+.gradient-text2 {
   background: radial-gradient(ellipse at top, #1b2735 0%, #090a0f 100%);
 }
 .gradient-text3 {
@@ -158,12 +158,15 @@
   -webkit-text-fill-color: transparent;
 }
 
-
 h1 span.text-1 {
   position: absolute;
   transform: translate(0%, 0%);
-  color:transparent;
-  background: radial-gradient(ellipse at bottom, rgba(75, 50, 116, 0.733) 0%, #090a0f 100%);
+  color: transparent;
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(75, 50, 116, 0.733) 0%,
+    #090a0f 100%
+  );
   -webkit-background-clip: text;
   animation: animate 4s ease-in-out infinite;
 }
@@ -244,28 +247,35 @@ h1 span.text-2 {
 p.inner-headings {
   text-shadow: 0 0 10px rgba(14, 98, 167, 0.781),
     0 0 10px rgba(55, 15, 129, 0.384);
+  font-size: clamp(1rem, 2rem, 2.5rem);
+  margin-top: clamp(2rem, 1rem, 2rem);
 }
 p.inner-headings {
   position: absolute;
   display: flex;
-  justify-content: center;
 }
 
 .ch-word {
   height: 40px;
   overflow: hidden;
-  margin-left: 0.5rem;
+  margin-left: 0.5rem 0;
 }
 
 .ch-word span .a {
   padding: 0.25rem 0.75rem;
-  height: 2.81rem;
-  margin-bottom: 2.81rem;
+  height: auto;
+  margin-bottom: 0.5rem;
   display: inline-block;
 }
 
 .ch-word span.word1 div:first-child {
   animation: text-animation 8s infinite;
+  -webkit-animation: text-animation 8s infinite;
+}
+@media (max-width: 768px) {
+  .ih2 {
+    flex-direction: column;
+  }
 }
 
 @keyframes text-animation {

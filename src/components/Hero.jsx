@@ -25,7 +25,7 @@ const Hero = () => {
             <p
               className={`${styles.heroSubText} invisible md:visible mt-2 text-aliceblue-100 inner-headings `}
             >
-              I am a
+              I am a &nbsp;
               <section className="ch-word  ">
                 <span className="word1 text-indigo-500">
                   <div>Programmer</div>
@@ -39,9 +39,9 @@ const Hero = () => {
               </section>
             </p>
             <p
-              className={`${styles.heroSubText} visible md:invisible mt-2 text-aliceblue-100 `}
+              className={`${styles.heroSubText} visible md:invisible mt-2 text-aliceblue-100 ih2`}
             >
-              I am a<span className="word1 text-indigo-400"> Programmer,</span>
+              I am a<span className="word1 text-indigo-400"> Programmer</span>
               <span className="word2 text-purple-400">
                 {" "}
                 Open Source Contributor

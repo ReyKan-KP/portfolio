@@ -24,25 +24,25 @@ const App = () => {
           <Hero />
           <StarsCanvas />
         </div>
-        {/* <div className="relative z-0"> */}
+        <div className="relative z-0">
           <About />
-          {/* <StarsCanvas />
+          <StarsCanvas />
         </div>
-        <div className="relative z-0"> */}
+        <div className="relative z-0">
           <Experience />
-          {/* <StarsCanvas />
-        </div> */}
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div id="stars3"></div>
-        {/* <div className="relative z-0"> */}
-          <Tech />
-          {/* <StarsCanvas />
+          <StarsCanvas />
         </div>
-        <div className=" z-0"> */}
+      <div id="stars"></div>
+      <div id="stars2"></div>
+      <div id="stars3"></div>
+        <div className="relative z-0">
+          <Tech />
+          <StarsCanvas />
+        </div>
+      <div className=" z-0">
           <Works />
-          {/* <StarsCanvas />
-        </div> */}
+          <StarsCanvas />
+        </div>
         <div className="relative z-0">
           <Contact />
           <StarsCanvas />
