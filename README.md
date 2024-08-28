@@ -16,7 +16,8 @@ This repository contains the code for my personal portfolio website. It's built 
 
 ![Portfolio Website Preview](#)
 
-> _Add a screenshot of your website here._
+![image](https://github.com/user-attachments/assets/2ff32003-630c-463d-99d2-b87f4261501e)
+
 
 ## 🚀 Getting Started
 
