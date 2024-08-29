@@ -7,11 +7,14 @@ import gsap from "gsap";
 
 export const HeroSection: React.FC = () => {
   const textRef = useRef<HTMLHeadingElement>(null);
-  const titles = [
-    "Full-Stack Developer",
-    "Open Source Contributor",
-    "Programmer",
-  ];
+  const titles = React.useMemo(
+    () => [
+      "Full-Stack Developer",
+      "Open Source Contributor",
+      "Programmer",
+    ],
+    []
+  );
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
 
   const gradients = [
@@ -43,16 +46,16 @@ export const HeroSection: React.FC = () => {
       gsap.fromTo(
         chars,
         { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, stagger: 0.05 }
+        { opacity: 1, y: 0, stagger: 0.09 }
       );
       setCurrentTitleIndex((currentTitleIndex + 1) % titles.length);
     };
 
-    gsap.delayedCall(3, changeText);
+    gsap.delayedCall(4, changeText);
     const interval = setInterval(changeText, 6000);
 
     return () => clearInterval(interval);
-  }, [currentTitleIndex]);
+  }, [currentTitleIndex, titles]);
 
   return (
     <div className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">

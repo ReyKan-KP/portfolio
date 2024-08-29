@@ -38,10 +38,10 @@ import {
   SiJenkins,
   SiPrisma,
   SiGooglecloud,
+  SiExpress,
 } from "react-icons/si";
+import { RiFirebaseLine } from "react-icons/ri";
 import JsIcon from "@public/assets/icons/square-js.svg";
-import TechIcon from "@components/TechIcon";
-import { title } from "process";
 import { useRef } from "react";
 
 const toolboxItems = [
@@ -59,7 +59,7 @@ const toolboxItems = [
   },
   {
     title: "Express.js",
-    iconType: FaNodeJs, // Using Node.js icon for Express.js
+    iconType: SiExpress,
   },
   {
     title: "MongoDB",
@@ -87,7 +87,7 @@ const toolboxItems = [
   },
   {
     title: "NextAuth.js",
-    iconType: SiNextdotjs, // Placeholder, you might use a generic auth icon instead
+    iconType: SiNextdotjs,
   },
   {
     title: "Python",
@@ -130,10 +130,6 @@ const toolboxItems = [
     iconType: SiMysql,
   },
   {
-    title: "SQLite",
-    iconType: SiMysql, // Placeholder, you might need to find a specific SQLite icon
-  },
-  {
     title: "Prisma",
     iconType: SiPrisma,
   },
@@ -147,7 +143,7 @@ const toolboxItems = [
   },
   {
     title: "Firebase",
-    iconType: SiFirebase,
+    iconType: RiFirebaseLine,
   },
   {
     title: "Jenkins",
@@ -158,48 +154,54 @@ const toolboxItems = [
     iconType: SiGraphql,
   },
   {
-    title: "REST API",
-    iconType: FaNodeJs, // Placeholder, use a different icon if necessary
-  },
-  {
     title: "Swagger",
     iconType: SiSwagger,
   },
   {
     title: "Information Retrieval Techniques",
-    iconType: FaSearch, // Placeholder, choose a suitable icon
+    iconType: FaSearch,
   },
 ];
 const hobbies = [
   {
     title: "Reading Novels",
     emoji: "📚",
-    left: "5%",
-    top: "5%",
+    styles: {
+      default: "left-[5%] top-[5%]",
+      sm: "left-[10%] top-[10%]",
+    },
   },
   {
     title: "Listening to Music",
     emoji: "🎵",
-    left: "50%",
-    top: "15%",
+    styles: {
+      default: "left-[50%] top-[15%]",
+      sm: "left-[40%] top-[20%]",
+    },
   },
   {
     title: "Watching TV Shows",
     emoji: "📺",
-    left: "10%",
-    top: "75%",
+    styles: {
+      default: "left-[10%] top-[75%]",
+      sm: "left-[20%] top-[70%]",
+    },
   },
   {
     title: "Watching Movies",
     emoji: "🎬",
-    left: "35%",
-    top: "40%",
+    styles: {
+      default: "left-[35%] top-[40%]",
+      sm: "left-[30%] top-[50%]",
+    },
   },
   {
     title: "Gaming",
     emoji: "🎮",
-    left: "70%",
-    top: "45%",
+    styles: {
+      default: "left-[70%] top-[45%]",
+      sm: "left-[60%] top-[55%]",
+    },
   },
 ];
 
@@ -218,12 +220,25 @@ export const AboutSection = () => {
             <Card className="h-[320px] md:col-span-2 lg:col-span-1">
               <CardHeader
                 title="My Reads"
-                description="Explore the books shaping my perspectives"
+                description="Explore the stories that fuel my creativity and shape my coding journey"
               />
-              <div className="w-40 mx-auto mt-8">
+              <div className="w-40 mx-auto mt-0">
                 <Image src={bookImage} alt="Book" />
               </div>
+              {/* <div className="px-6 py-4">
+                <h3 className="font-bold text-lg">
+                  Omniscient Reader’s Viewpoint
+                </h3>
+                <p className="text-gray-700 mt-2">
+                  A captivating web novel that inspires me with its complex
+                  storytelling and strategic thinking. Just like in ORV, where
+                  the protagonist navigates a world full of challenges and
+                  unknowns, I approach full-stack development with the same
+                  resilience and adaptability.
+                </p>
+              </div> */}
             </Card>
+
             <Card className="h-[320px] p-0 md:col-span-3 lg:col-span-2">
               <CardHeader
                 title="My Toolbox"
@@ -253,8 +268,7 @@ export const AboutSection = () => {
                 {hobbies.map((hobby) => (
                   <motion.div
                     key={hobby.title}
-                    className="inline-flex gap-2 px-6 py-1.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full items-center absolute"
-                    style={{ left: hobby.left, top: hobby.top }}
+                    className={`inline-flex gap-2 px-6 py-1.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full items-center absolute ${hobby.styles.default} sm:${hobby.styles.sm}`}
                     drag
                     dragConstraints={constraintRef}
                   >

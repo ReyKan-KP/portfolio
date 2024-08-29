@@ -3,7 +3,7 @@ import CheckCircleIcon from "@public/assets/icons/check-circle.svg";
 import grainImage from "@public/assets/images/grain.jpg";
 import Link from "next/link";
 import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import Card from "@components/Card";
 import SectionHeader from "@components/SectionHeader";
 import { motion, Variants } from "framer-motion";
@@ -125,97 +125,147 @@ export const ProjectsSection = () => {
         />
         <div className="flex flex-col mt-10 md:mt-20 gap-20">
           {portfolioProjects.map((project, projectIndex) => (
-            <motion.div
+            <div
               key={project.name}
               className="px-8 pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky"
               style={{ top: `calc(64px + ${projectIndex * 40}px)` }}
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true, amount: 0.8 }}
-              variants={cardVariants}
             >
-              <Tilt
-                tiltMaxAngleX={10}
-                tiltMaxAngleY={10}
-                perspective={1000}
-                scale={1.02}
-                transitionSpeed={500}
-                className="will-change-transform"
-              >
-                <Card>
-                  <div
-                    className="absolute inset-0 -z-30 opacity-5"
-                    style={{ backgroundImage: `url(${grainImage.src})` }}
-                  ></div>
+              {/* Conditionally apply motion and tilt effects based on screen size */}
+              <div className="block md:hidden">
+                  <Card>
+                    <div
+                      className="absolute inset-0 -z-30 opacity-5"
+                      style={{ backgroundImage: `url(${grainImage.src})` }}
+                    ></div>
 
-                  <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
-                        {project.name}
-                      </h3>
-                      <div className="flex gap-4">
-                        {/* <Link href={project.source_code_link}>
-                          <span className="flex items-center text-sm text-white/70 hover:text-white">
-                            <FaExternalLinkAlt className="mr-2" />
-                            Visit Live Site
-                          </span>
-                        </Link> */}
-                        <Link href={project.source_code_link}>
-                          <span className="flex items-center text-sm text-white/70 hover:text-white">
-                            <FaGithub className="mr-2" />
-                            GitHub
-                          </span>
-                        </Link>
+                    <div>
+                      <div className="flex justify-between items-center mb-4">
+                        <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
+                          {project.name}
+                        </h3>
+                        <div className="flex gap-4">
+                          <Link href={project.source_code_link}>
+                            <span className="flex items-center text-sm text-white/70 hover:text-white">
+                              <FaGithub className="mr-2" />
+                              GitHub
+                            </span>
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className={`text-sm font-medium ${tag.color}`}
-                        >
-                          #{tag.name}
-                        </span>
-                      ))}
-                    </div>
-                    <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
-                    <div className="lg:flex lg:items-center lg:gap-10">
-                      <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
-                        {project.description.map((desc, index) => (
-                          <li
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {project.tags.map((tag, index) => (
+                          <span
                             key={index}
-                            className="flex gap-2 text-sm md:text-base text-white/50"
+                            className={`text-sm font-medium ${tag.color}`}
                           >
-                            <CheckCircleIcon className="size-5 md:size-6" />
-                            <span>{desc}</span>
-                          </li>
+                            #{tag.name}
+                          </span>
                         ))}
-                      </ul>
-                      <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                        <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
-                          In the code you&apos;ve shared, the layout and
-                          objectFit props are being used with the next/image
-                          component, which are deprecated in Next.js 13.
-                          Here&apos;s how you can update the code to make it
-                          compatible with Next.js 13: Key Changes: Remove layout
-                          Prop: The layout prop has been replaced with new
-                          responsive defaults. Replace objectFit Prop: Use the
-                          style prop instead for setting object-fit. Updated
-                          Code: jsx
-                          <Image
-                            src={project.image}
-                            alt={project.name}
-                            className="rounded-3xl object-cover w-full h-full"
-                            style={{ objectFit: "cover" }} // Replaces objectFit prop
-                            fill // Replaces layout="fill"
-                          />
+                      </div>
+                      <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
+                      <div className="lg:flex lg:items-center lg:gap-10">
+                        <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
+                          {project.description.map((desc, index) => (
+                            <li
+                              key={index}
+                              className="flex gap-2 text-sm md:text-base text-white/50"
+                            >
+                              <CheckCircleIcon className="size-5 md:size-6" />
+                              <span>{desc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
+                          <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
+                            <Image
+                              src={project.image}
+                              alt={project.name}
+                              className="rounded-3xl object-cover w-full h-full"
+                              style={{ objectFit: "cover" }}
+                              fill
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
                 </Card>
-              </Tilt>
-            </motion.div>
+              </div>
+
+              <motion.div
+                className="hidden md:block"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.8 }}
+                variants={cardVariants}
+              >
+                <Tilt
+                  tiltMaxAngleX={10}
+                  tiltMaxAngleY={10}
+                  perspective={1000}
+                  scale={1.02}
+                  transitionSpeed={500}
+                  className="will-change-transform"
+                >
+                  <Card>
+                    <div
+                      className="absolute inset-0 -z-30 opacity-5"
+                      style={{ backgroundImage: `url(${grainImage.src})` }}
+                    ></div>
+
+                    <div>
+                      <div className="flex justify-between items-center mb-4">
+                        <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
+                          {project.name}
+                        </h3>
+                        <div className="flex gap-4">
+                          <Link href={project.source_code_link}>
+                            <span className="flex items-center text-sm text-white/70 hover:text-white">
+                              <FaGithub className="mr-2" />
+                              GitHub
+                            </span>
+                          </Link>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {project.tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className={`text-sm font-medium ${tag.color}`}
+                          >
+                            #{tag.name}
+                          </span>
+                        ))}
+                      </div>
+                      <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
+                      <div className="lg:flex lg:items-center lg:gap-10">
+                        <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
+                          {project.description.map((desc, index) => (
+                            <li
+                              key={index}
+                              className="flex gap-2 text-sm md:text-base text-white/50"
+                            >
+                              <CheckCircleIcon className="size-5 md:size-6" />
+                              <span>{desc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
+                          <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
+                            <Image
+                              src={project.image}
+                              alt={project.name}
+                              className="rounded-3xl object-cover w-full h-full"
+                              style={{ objectFit: "cover" }}
+                              fill
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </Tilt>
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>

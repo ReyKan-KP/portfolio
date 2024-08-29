@@ -1,12 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import {
-  FiGithub,
-  FiInstagram,
-  FiLinkedin,
-  FiMail,
-} from "react-icons/fi";
+import { FiGithub, FiInstagram, FiLinkedin, FiMail } from "react-icons/fi";
 import { SiReaddotcv } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -20,16 +15,16 @@ function SocialIcons() {
     {
       name: "Resume",
       icon: (
-        <motion.div className="rotate-70">
-          <SiReaddotcv />
-        </motion.div>
+        // <motion.div className="rotate-70">
+        <SiReaddotcv className="rotate-10" />
+        // </motion.div>
       ),
       link: "/assets/KanishakaPranjal_Resume.pdf",
     },
     {
       name: "LinkedIn",
       icon: <FiLinkedin />,
-      link: "www.linkedin.com/in/kanishak-pranjal-070a45235",
+      link: "https://www.linkedin.com/in/kanishak-pranjal-070a45235/",
     },
     {
       name: "Email", // Adding the email option
@@ -74,11 +69,11 @@ function SocialIcons() {
 
   return (
     <motion.div
-      className="fixed top-1/2 left-4 md:left-8 lg:left-16 transform -translate-y-1/2 flex flex-col items-center gap-4 sm:gap-6 md:gap-8 z-50"
+      className="fixed top-1/2 left-2 sm:left-4 md:left-8 lg:left-16 transform -translate-y-1/2 flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 z-50"
       initial="hidden"
       animate="visible"
     >
-      <ul className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
+      <ul className="flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
         {socialLinks.map(({ name, icon, link }, index) => (
           <motion.li
             key={name}
@@ -89,14 +84,14 @@ function SocialIcons() {
             whileHover={getRandomHoverAnimation()}
           >
             <Link href={link} target="_blank">
-              <motion.div className="p-2 sm:p-3 md:p-4 text-2xl sm:text-2xl md:text-3xl text-lightest-slate hover:text-theme-color focus:outline-none focus:text-theme-color">
+              <motion.div className="p-1 sm:p-2 md:p-3 lg:p-4 text-xl sm:text-2xl md:text-2xl lg:text-3xl text-lightest-slate hover:text-theme-color focus:outline-none focus:text-theme-color">
                 {icon}
               </motion.div>
             </Link>
           </motion.li>
         ))}
       </ul>
-      <div className="w-px bg-light-slate flex-1 mt-4 sm:mt-6 md:mt-8"></div>
+      <div className="w-px bg-light-slate flex-1 mt-2 sm:mt-4 md:mt-6 lg:mt-8"></div>
     </motion.div>
   );
 }
