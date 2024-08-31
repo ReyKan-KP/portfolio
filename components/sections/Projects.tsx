@@ -92,7 +92,7 @@ const portfolioProjects = [
         color: "text-green-500",
       },
     ],
-    image: "/assets/images/citydex.png",
+    image: "/assets/images/CityDex.png",
     source_code_link: "https://github.com/ReyKan-KP/CityDex",
   },
 ];
@@ -132,62 +132,62 @@ export const ProjectsSection = () => {
             >
               {/* Conditionally apply motion and tilt effects based on screen size */}
               <div className="block md:hidden">
-                  <Card>
-                    <div
-                      className="absolute inset-0 -z-30 opacity-5"
-                      style={{ backgroundImage: `url(${grainImage.src})` }}
-                    ></div>
+                <Card>
+                  <div
+                    className="absolute inset-0 -z-30 opacity-5"
+                    style={{ backgroundImage: `url(${grainImage.src})` }}
+                  ></div>
 
-                    <div>
-                      <div className="flex justify-between items-center mb-4">
-                        <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
-                          {project.name}
-                        </h3>
-                        <div className="flex gap-4">
-                          <Link href={project.source_code_link}>
-                            <span className="flex items-center text-sm text-white/70 hover:text-white">
-                              <FaGithub className="mr-2" />
-                              GitHub
-                            </span>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        {project.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className={`text-sm font-medium ${tag.color}`}
-                          >
-                            #{tag.name}
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
+                        {project.name}
+                      </h3>
+                      <div className="flex gap-4">
+                        <Link href={project.source_code_link}>
+                          <span className="flex items-center text-sm text-white/70 hover:text-white">
+                            <FaGithub className="mr-2" />
+                            GitHub
                           </span>
-                        ))}
+                        </Link>
                       </div>
-                      <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
-                      <div className="lg:flex lg:items-center lg:gap-10">
-                        <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
-                          {project.description.map((desc, index) => (
-                            <li
-                              key={index}
-                              className="flex gap-2 text-sm md:text-base text-white/50"
-                            >
-                              <CheckCircleIcon className="size-5 md:size-6" />
-                              <span>{desc}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                          <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
-                            <Image
-                              src={project.image}
-                              alt={project.name}
-                              className="rounded-3xl object-cover w-full h-full"
-                              style={{ objectFit: "cover" }}
-                              fill
-                            />
-                          </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {project.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className={`text-sm font-medium ${tag.color}`}
+                        >
+                          #{tag.name}
+                        </span>
+                      ))}
+                    </div>
+                    <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
+                    <div className="lg:flex lg:items-center lg:gap-10">
+                      <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
+                        {project.description.map((desc, index) => (
+                          <li
+                            key={index}
+                            className="flex gap-2 text-sm md:text-base text-white/50"
+                          >
+                            <CheckCircleIcon className="size-5 md:size-6" />
+                            <span>{desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
+                        <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
+                          <Image
+                            src={project.image}
+                            alt={project.name}
+                            className="rounded-3xl object-cover w-full h-full"
+                            style={{ objectFit: "cover" }}
+                            fill
+                          />
                         </div>
                       </div>
                     </div>
+                  </div>
                 </Card>
               </div>
 
