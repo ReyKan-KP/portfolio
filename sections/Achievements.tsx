@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
-import Card from "../Card";
+import Card from "../components/Card";
 
 import gcp from "@public/assets/images/gcp.png";
 import h23 from "@public/assets/images/h23.png";

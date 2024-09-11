@@ -1,7 +1,14 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { FiGithub, FiInstagram, FiLinkedin, FiMail } from "react-icons/fi";
+import {
+  FiGithub,
+  FiInstagram,
+  FiLinkedin,
+  FiMail,
+  FiPhone,
+} from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import { SiReaddotcv } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -11,30 +18,43 @@ function SocialIcons() {
       name: "Github",
       icon: <FiGithub />,
       link: "https://github.com/ReyKan-KP",
+      color: "#171515",
     },
     {
       name: "Resume",
-      icon: (
-        // <motion.div className="rotate-70">
-        <SiReaddotcv className="rotate-10" />
-        // </motion.div>
-      ),
+      icon: <SiReaddotcv className="rotate-10" />,
       link: "/assets/KanishakaPranjal_Resume.pdf",
+      color: "#e7ee9e",
     },
     {
       name: "LinkedIn",
       icon: <FiLinkedin />,
       link: "https://www.linkedin.com/in/kanishak-pranjal-070a45235/",
+      color: "#0A66C2",
     },
     {
-      name: "Email", // Adding the email option
+      name: "Email",
       icon: <FiMail />,
       link: "mailto:kanishakpranjal@gmail.com",
+      color: "#D44638",
+    },
+    // {
+    //   name: "Instagram",
+    //   icon: <FiInstagram />,
+    //   link: "https://www.instagram.com/kanishak_pranjal_/",
+    //   color: "#E1306C",
+    // },
+    {
+      name: "Phone",
+      icon: <FiPhone />,
+      link: "tel:+917488313013",
+      color: "#678fcc",
     },
     {
-      name: "Instagram",
-      icon: <FiInstagram />,
-      link: "https://www.instagram.com/kanishak_pranjal_/",
+      name: "Whatsapp",
+      icon: <FaWhatsapp />,
+      link: "https://wa.me/7488313013",
+      color: "#075E54",
     },
   ];
 
@@ -51,22 +71,6 @@ function SocialIcons() {
     }),
   };
 
-  const hoverAnimations = [
-    { scale: 1.5, rotate: 20 },
-    { scale: 1.5, rotate: -20 },
-    { scale: 1.5, x: 10 },
-    { scale: 1.5, x: -10 },
-    { scale: 1.5, y: -30 },
-    { scale: 1.5, y: 30 },
-    { scale: 1.5, rotate: 15, x: 5 },
-    { scale: 1.5, rotate: -15, y: -5 },
-  ];
-
-  const getRandomHoverAnimation = () => {
-    const randomIndex = Math.floor(Math.random() * hoverAnimations.length);
-    return hoverAnimations[randomIndex];
-  };
-
   return (
     <motion.div
       className="fixed top-1/2 left-2 sm:left-4 md:left-8 lg:left-16 transform -translate-y-1/2 flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 z-50"
@@ -74,17 +78,21 @@ function SocialIcons() {
       animate="visible"
     >
       <ul className="flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
-        {socialLinks.map(({ name, icon, link }, index) => (
+        {socialLinks.map(({ name, icon, link, color }, index) => (
           <motion.li
             key={name}
             title={name}
             className="transition-transform duration-300 ease-in-out transform"
             variants={iconVariants}
             custom={index}
-            whileHover={getRandomHoverAnimation()}
+            whileHover={{ scale: 1.3 }}
           >
             <Link href={link} target="_blank">
-              <motion.div className="p-1 sm:p-2 md:p-3 lg:p-4 text-xl sm:text-2xl md:text-2xl lg:text-3xl text-lightest-slate hover:text-theme-color focus:outline-none focus:text-theme-color">
+              <motion.div
+                className="p-1 sm:p-2 md:p-3 lg:p-4 text-xl sm:text-2xl md:text-2xl lg:text-3xl text-lightest-slate hover:text-white-100 focus:outline-none focus:text-white-100"
+                whileHover={{ color: color }}
+                transition={{ type: "tween", duration: 0.8 }}
+              >
                 {icon}
               </motion.div>
             </Link>
