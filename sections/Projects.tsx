@@ -11,6 +11,43 @@ import Tilt from "react-parallax-tilt";
 
 const portfolioProjects = [
   {
+    name: "NexiMeet",
+    description: [
+      "An all-in-one solution for hosting dynamic and engaging virtual events.",
+      "Offers live streaming capabilities, interactive sessions, and customizable virtual exhibitor booths.",
+      "Built with Next.js, TypeScript, and PostgreSQL, utilizing NextAuth.js and Firebase for authentication, and Stream for video and chat integration.",
+      "Key features include live streaming, interactive tools, customizable exhibitor booths, attendee engagement tools, and streamlined registration and management.",
+    ],
+    tags: [
+      {
+        name: "Next.js",
+        color: "text-blue-500",
+      },
+      {
+        name: "TypeScript",
+        color: "text-yellow-500",
+      },
+      {
+        name: "PostgreSQL",
+        color: "text-green-500",
+      },
+      {
+        name: "NextAuth.js",
+        color: "text-purple-500",
+      },
+      {
+        name: "Firebase",
+        color: "text-orange-500",
+      },
+      {
+        name: "Stream",
+        color: "text-pink-500",
+      },
+    ],
+    image: "/assets/images/neximeet.png",
+    source_code_link: "https://github.com/ReyKan-KP/nexi-meet",
+  },
+  {
     name: "GoodWill",
     description: [
       "NGO Funding Website designed to connect NGOs with potential donors and volunteers.",
@@ -127,10 +164,10 @@ export const ProjectsSection = () => {
           {portfolioProjects.map((project, projectIndex) => (
             <div
               key={project.name}
-              className="px-8 pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky"
+              className="px-8 pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky group transition-all duration-300 ease-in-out md:w-3/4 lg:w-2/3 hover:md:w-[95%] hover:lg:w-[90%]"
               style={{ top: `calc(64px + ${projectIndex * 40}px)` }}
             >
-              {/* Conditionally apply motion and tilt effects based on screen size */}
+              {/* Mobile version remains unchanged */}
               <div className="block md:hidden">
                 <Card>
                   <div
@@ -176,11 +213,11 @@ export const ProjectsSection = () => {
                         ))}
                       </ul>
                       <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                        <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
+                        <div className="relative h-60 sm:h-72 md:h-80 lg:h-96 project-image-container">
                           <Image
                             src={project.image}
                             alt={project.name}
-                            className="rounded-3xl object-cover w-full h-full"
+                            className="rounded-3xl object-cover w-full h-full project-image"
                             style={{ objectFit: "cover" }}
                             fill
                           />
@@ -191,6 +228,7 @@ export const ProjectsSection = () => {
                 </Card>
               </div>
 
+              {/* Desktop version with hover effect */}
               <motion.div
                 className="hidden md:block"
                 initial="offscreen"
@@ -206,7 +244,7 @@ export const ProjectsSection = () => {
                   transitionSpeed={500}
                   className="will-change-transform"
                 >
-                  <Card>
+                  <Card className="transition-all duration-300 ease-in-out group-hover:scale-105 ">
                     <div
                       className="absolute inset-0 -z-30 opacity-5"
                       style={{ backgroundImage: `url(${grainImage.src})` }}
@@ -250,12 +288,12 @@ export const ProjectsSection = () => {
                           ))}
                         </ul>
                         <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                          <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
+                          <div className="relative h-60 sm:h-72 md:h-80 lg:h-96 overflow-hidden rounded-3xl">
                             <Image
                               src={project.image}
                               alt={project.name}
-                              className="rounded-3xl object-cover w-full h-full"
-                              style={{ objectFit: "cover" }}
+                              className="object-contain w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-110"
+                              // style={{ objectFit: "contain" }}
                               fill
                             />
                           </div>
@@ -272,3 +310,16 @@ export const ProjectsSection = () => {
     </section>
   );
 };
+
+<style jsx global>{`
+  .project-image-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .project-image {
+    transition: transform 0.3s ease-in-out;
+  }
+  .project-image-container:hover .project-image {
+    transform: scale(1.1);
+  }
+`}</style>

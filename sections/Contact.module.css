@@ -1,0 +1,123 @@
+.section {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.contactContainer {
+  /* Add styles for the contact container */
+}
+
+.title {
+  font-size: 2.7rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 0.2;
+  margin: 0;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-top: 1.25rem;
+}
+
+.contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  color: #4B5563;
+}
+
+.headText {
+  margin-top: 2.5rem;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: #E5E7EB;
+  margin-top: 0.75rem;
+}
+
+.form {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.submitButton {
+  /* Add styles for the submit button */
+}
+
+.buttonIcon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Add styles for ContactSection component */
+.contactSection {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+.contactSectionContainer {
+  /* Add container styles */
+}
+
+.gradientBackground {
+  background-image: linear-gradient(to right, #6EE7B7, #3B82F6);
+  color: #111827;
+  padding: 2rem 2.5rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.grainOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+.contactSectionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .contactSectionContent {
+    flex-direction: row;
+    gap: 4rem;
+    text-align: left;
+  }
+}
+
+/* Add more specific styles as needed */
