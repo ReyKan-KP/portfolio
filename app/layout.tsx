@@ -3,6 +3,7 @@ import { Inter, Calistoga } from "next/font/google";
 import "@styles/globals.css";
 import { twMerge } from "tailwind-merge";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const calistoga = Calistoga({
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
