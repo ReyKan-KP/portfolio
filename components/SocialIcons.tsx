@@ -29,7 +29,7 @@ function SocialIcons() {
     {
       name: "LinkedIn",
       icon: <FiLinkedin />,
-      link: "https://www.linkedin.com/in/kanishak-pranjal-070a45235/",
+      link: "https://www.linkedin.com/in/kanishaka-pranjal-070a45235/",
       color: "#0A66C2",
     },
     {
