@@ -12,7 +12,19 @@ const words = [
   "Search Optimized",
   "Usable",
   "Reliable",
+  "Intuitive",
+  "Engaging",
+  "Customizable",
+  "Dynamic",
+  "Modern",
+  "Optimized",
+  "Efficient",
+  "Seamless",
+  "Innovative",
+  "Functional",
+  "Flexible",
 ];
+
 export const TapeSection = () => {
   return (
     <div className="py-16 lg:py-24 overflow-x-clip">

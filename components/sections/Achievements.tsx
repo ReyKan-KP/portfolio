@@ -4,7 +4,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import Card from "../Card";
-
+import SectionHeader from "@components/SectionHeader";
 import gcp from "@public/assets/images/gcp.png";
 import h23 from "@public/assets/images/h23.png";
 
@@ -42,9 +42,11 @@ const AchievementsTimeline = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200">
-        Achievements Timeline
-      </h1>
+      <SectionHeader
+        eyebrow="Milestones Achieved"
+        title="My Journey So Far"
+        description="Explore the key moments and accomplishments that have shaped my professional growth."
+      />
       <div className="relative wrap overflow-hidden p-4 md:p-10 h-full">
         <div className="border-2 absolute border-opacity-20 border-gray-700 dark:border-gray-300 h-full left-1/2 transform -translate-x-1/2"></div>
         {achievements.map((achievement, index) => (

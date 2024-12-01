@@ -8,8 +8,46 @@ import Card from "@components/Card";
 import SectionHeader from "@components/SectionHeader";
 import { motion, Variants } from "framer-motion";
 import Tilt from "react-parallax-tilt";
-
+import { Globe } from "lucide-react";
 const portfolioProjects = [
+  {
+    name: "NexiMeet",
+    description: [
+      "An all-in-one solution for hosting dynamic and engaging virtual events.",
+      "Offers live streaming capabilities, interactive sessions, and customizable virtual exhibitor booths.",
+      "Built with Next.js, TypeScript, and MongoDB, utilizing NextAuth.js and Firebase for authentication, and Stream for video and chat integration.",
+      "Key features include live streaming, interactive tools, customizable exhibitor booths, attendee engagement tools, and streamlined registration and management.",
+    ],
+    tags: [
+      {
+        name: "Next.js",
+        color: "text-blue-500",
+      },
+      {
+        name: "TypeScript",
+        color: "text-yellow-500",
+      },
+      {
+        name: "MongoDB",
+        color: "text-green-500",
+      },
+      {
+        name: "NextAuth.js",
+        color: "text-purple-500",
+      },
+      {
+        name: "Firebase",
+        color: "text-orange-500",
+      },
+      {
+        name: "Stream",
+        color: "text-pink-500",
+      },
+    ],
+    image: "/assets/images/neximeet.png",
+    source_code_link: "https://github.com/ReyKan-KP/nexi-meet",
+    live_site_link: "https://nexi-meet.vercel.app",
+  },
   {
     name: "GoodWill",
     description: [
@@ -40,7 +78,8 @@ const portfolioProjects = [
       },
     ],
     image: "/assets/images/goodwill.png",
-    source_code_link: "https://github.com/ReyKan-KP/GoodWill",
+    source_code_link: "https://github.com/ReyKan-KP/GoodWill_2.0",
+    live_site_link: "https://good-will-2-0.vercel.app/",
   },
   {
     name: "Recommendation System",
@@ -70,6 +109,8 @@ const portfolioProjects = [
     image: "/assets/images/recommendation.png",
     source_code_link:
       "https://github.com/ReyKan-KP/Anime-Manga-Recommendation-System-Using-IR",
+    live_site_link:
+      "https://anime-manga-recommendation-system-using.onrender.com/",
   },
   {
     name: "CityDex",
@@ -94,6 +135,7 @@ const portfolioProjects = [
     ],
     image: "/assets/images/CityDex.png",
     source_code_link: "https://github.com/ReyKan-KP/CityDex",
+    live_site_link: "#",
   },
 ];
 
@@ -143,12 +185,30 @@ export const ProjectsSection = () => {
                       <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
                         {project.name}
                       </h3>
-                      <div className="flex gap-4">
-                        <Link href={project.source_code_link}>
-                          <span className="flex items-center text-sm text-white/70 hover:text-white">
-                            <FaGithub className="mr-2" />
-                            GitHub
-                          </span>
+                      <div className="flex flex-wrap">
+                        <Link
+                          href={project.live_site_link}
+                          passHref
+                          legacyBehavior
+                        >
+                          <a target="_blank" rel="noopener noreferrer">
+                            <span className="flex items-center text-sm text-white/70 hover:text-white">
+                              <Globe className="mr-2" />
+                              Live-Site
+                            </span>
+                          </a>
+                        </Link>
+                        <Link
+                          href={project.source_code_link}
+                          passHref
+                          legacyBehavior
+                        >
+                          <a target="_blank" rel="noopener noreferrer">
+                            <span className="flex items-center text-sm text-white/70 hover:text-white">
+                              <FaGithub className="mr-2" />
+                              GitHub
+                            </span>
+                          </a>
                         </Link>
                       </div>
                     </div>
@@ -218,7 +278,21 @@ export const ProjectsSection = () => {
                           {project.name}
                         </h3>
                         <div className="flex gap-4">
-                          <Link href={project.source_code_link}>
+                          <Link
+                            href={project.live_site_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span className="flex items-center text-sm text-white/70 hover:text-white">
+                              <Globe className="mr-2" />
+                              Live-Site
+                            </span>
+                          </Link>
+                          <Link
+                            href={project.source_code_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <span className="flex items-center text-sm text-white/70 hover:text-white">
                               <FaGithub className="mr-2" />
                               GitHub
