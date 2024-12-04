@@ -38,6 +38,20 @@ const AchievementsTimeline = () => {
         "Showcased dedication to industry trends and commitment to open source principles.",
       ],
     },
+    {
+      title: "Hacktoberfest 2024",
+      company_name: "Hacktoberfest",
+      icon: h23,
+      iconBg: "#1a1b21",
+      date: "Oct 2024 - Nov 2024",
+      points: [
+        "Actively participated in the global open-source event, Hacktoberfest 2024, by contributing to impactful projects.",
+        "Collaborated with developers worldwide, showcasing a strong commitment to open-source development.",
+        "Applied advanced problem-solving and coding skills to improve and optimize various repositories.",
+        "Enhanced expertise in version control, issue tracking, and pull request workflows in dynamic team environments.",
+        "Demonstrated dedication to fostering innovation and building sustainable, community-driven solutions.",
+      ],
+    },
   ];
 
   return (
