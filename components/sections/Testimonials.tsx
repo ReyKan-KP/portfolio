@@ -11,17 +11,17 @@ export function Testimonials() {
     },
     {
       quote:
-        "Kanishaka demonstrated exceptional skill in React and Next.js, seamlessly handling complex frontend and backend tasks. His ability to learn quickly and proactively address challenges made him an invaluable part of the team. His contributions significantly elevated the quality and functionality of our project.",
-      name: "Emily Watson",
-      designation: "",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "Kanishaka is Great Developer and also as in person. He’s always willing to work, excels in UI/UX, ships products efficiently, and has a good understanding of what’s needed.",
+      name: "Aaryan",
+      designation: "Generative AI Developer at Intellify (Build Fast With AI)",
+      src: "/images/testimonials2.png",
     },
     {
       quote:
-        "Kanishaka's technical expertise and proactive mindset stood out throughout the project. Whether it was implementing a complex feature or optimizing performance, he consistently delivered outstanding results. His work ethic and teamwork made him an asset to the team.",
-      name: "",
-      designation: "James Kim",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "Kanishaka excelled in React and Next.js, showcasing strong problem-solving skills and a proactive mindset. His adaptability and teamwork greatly contributed to the project's success.",
+      name: "Sanjeev Patel",
+      designation: "Full Stack Developer at Intellify (Build Fast With AI)",
+      src: "/images/testimonials3.png",
     },
     // {
     //   quote:

@@ -11,6 +11,41 @@ import Tilt from "react-parallax-tilt";
 import { Globe } from "lucide-react";
 const portfolioProjects = [
   {
+    "name": "FableWeaver.ai",
+    "description": [
+      "An AI-powered storytelling platform that enables users to create, interact with, and develop unique story characters through dynamic AI-driven interactions.",
+      "Features include character customization, adaptive recommendations, multi-character interactions, and AI-powered story generation.",
+      "Built with Next.js, GenAI, and Supabase and the AI SDK for real-time interactions.",
+      "Enhances user engagement with a Story Weaving Engine for AI-driven content creation and real-time plot progression."
+    ],
+    "tags": [
+      {
+        "name": "Next.js",
+        "color": "text-blue-500"
+      },
+      {
+        "name": "GenAI",
+        "color": "text-purple-500"
+      },
+      {
+        "name": "AI SDK",
+        "color": "text-yellow-500"
+      },
+      {
+        "name": "Gemini API",
+        "color": "text-orange-500"
+      },
+      {
+        "name": "Supabase",
+        "color": "text-green-500"
+      }
+    ],
+    image: "/assets/images/FableWeaver.png",
+    source_code_link: "https://github.com/ReyKan-KP/FableWeaver.ai",
+    live_site_link: "https://fable-weaver-ai.vercel.app/",
+  },
+
+  {
     name: "NexiMeet",
     description: [
       "An all-in-one solution for hosting dynamic and engaging virtual events.",
@@ -141,8 +176,8 @@ const portfolioProjects = [
 
 const cardVariants: Variants = {
   offscreen: {
-    y: 300,
-    opacity: 0,
+    y: 150,
+    opacity: 0
   },
   onscreen: {
     y: 0,
@@ -150,10 +185,11 @@ const cardVariants: Variants = {
     rotate: 0,
     transition: {
       type: "spring",
-      bounce: 0.4,
-      duration: 0.8,
-    },
-  },
+      bounce: 0.3,
+      duration: 0.6,
+      staggerChildren: 0.1
+    }
+  }
 };
 
 export const ProjectsSection = () => {
@@ -165,15 +201,25 @@ export const ProjectsSection = () => {
           title="Featured Projects"
           description="See how I transformed concepts into engaging projects"
         />
-        <div className="flex flex-col mt-10 md:mt-20 gap-20">
+        <motion.div 
+          className="flex flex-col mt-10 md:mt-20 gap-20"
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {portfolioProjects.map((project, projectIndex) => (
             <div
               key={project.name}
               className="px-8 pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky"
               style={{ top: `calc(64px + ${projectIndex * 40}px)` }}
             >
-              {/* Conditionally apply motion and tilt effects based on screen size */}
-              <div className="block md:hidden">
+              <motion.div 
+                className="block md:hidden"
+                variants={cardVariants}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.3 }}
+              >
                 <Card>
                   <div
                     className="absolute inset-0 -z-30 opacity-5"
@@ -249,21 +295,21 @@ export const ProjectsSection = () => {
                     </div>
                   </div>
                 </Card>
-              </div>
+              </motion.div>
 
               <motion.div
                 className="hidden md:block"
+                variants={cardVariants}
                 initial="offscreen"
                 whileInView="onscreen"
-                viewport={{ once: true, amount: 0.8 }}
-                variants={cardVariants}
+                viewport={{ once: true, amount: 0.3 }}
               >
                 <Tilt
-                  tiltMaxAngleX={10}
-                  tiltMaxAngleY={10}
+                  tiltMaxAngleX={5}
+                  tiltMaxAngleY={5}
                   perspective={1000}
-                  scale={1.02}
-                  transitionSpeed={500}
+                  scale={1.01}
+                  transitionSpeed={400}
                   className="will-change-transform"
                 >
                   <Card>
@@ -341,7 +387,7 @@ export const ProjectsSection = () => {
               </motion.div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

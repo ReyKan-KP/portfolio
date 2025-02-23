@@ -2,11 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import memojiImage from "@public/assets/images/memoji-computer.png";
-import OrbitAnimations from "@components/OrbitAnimations";
+import { motion as m, AnimatePresence } from "framer-motion";
 import { GradualSpacing } from "@/components/ui/gradual-spacing";
 import { LetterPullup } from "@/components/ui/letter-pullup";
 import { FlipText } from "@/components/ui/flip-text";
+import OrbitAnimations from "@components/OrbitAnimations";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { HiArrowDown } from "react-icons/hi";
 
 export const HeroSection: React.FC = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
@@ -14,16 +16,21 @@ export const HeroSection: React.FC = () => {
   const titles = [
     "Full-Stack Developer",
     "Next.js Developer",
-    "Programmer",
-    "Coder",
-    "MERN Stack Developer",
+    "Gen AI Enthusiast",
+    "Problem Solver",
     "Open Source Contributor",
   ];
 
   const gradients = [
+    "bg-gradient-to-r from-emerald-400 to-sky-500",
     "bg-gradient-to-r from-blue-400 via-teal-500 to-sky-600",
     "bg-gradient-to-r from-sky-400 via-blue-500 to-teal-500",
-    "bg-gradient-to-r from-teal-400 via-sky-500 to-blue-500",
+  ];
+
+  const socialLinks = [
+    { icon: FaGithub, href: "https://github.com/ReyKan-KP", color: "hover:text-white" },
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/kanishaka-pranjal-070a45235/", color: "hover:text-blue-400" },
+    // { icon: FaTwitter, href: "https://twitter.com/KanishakaP", color: "hover:text-sky-400" },
   ];
 
   useEffect(() => {
@@ -54,9 +61,7 @@ export const HeroSection: React.FC = () => {
           />
         );
       case 1:
-        return (
-          <LetterPullup words={title} delay={0.05} className={baseClass} />
-        );
+        return <LetterPullup words={title} delay={0.05} className={baseClass} />;
       case 2:
         return (
           <FlipText
@@ -76,55 +81,138 @@ export const HeroSection: React.FC = () => {
   };
 
   return (
-    <div className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">
+    <div className="min-h-screen relative z-0 flex items-center justify-center overflow-hidden pt-20">
       <OrbitAnimations />
-      <div className="container">
-        <div className="flex flex-col items-center">
-          <Image src={memojiImage} alt="Memoji" width={100} height={100} />
-        </div>
-        <div className="flex justify-center items-center mt-2">
-          <div className="bg-gray-950 border border-gray-800 px-4 py-1.5 inline-flex items-center gap-4 rounded-lg">
-            <div className="bg-green-500 w-2.5 h-2.5 rounded-full relative">
-              <div className="bg-green-500 w-2.5 h-2.5 rounded-full absolute inset-0 animate-ping-large"></div>
+      
+      {/* Gradient Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl"></div> */}
+        {/* <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl"></div> */}
+      </div>
+
+      <div className="container relative">
+        <m.div 
+          className="flex flex-col items-center max-w-4xl mx-auto px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Profile Image */}
+          <m.div
+            className="relative"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          >
+            <div className="relative size-32 md:size-40">
+              <Image 
+                src="/images/kp.png" 
+                alt="Kanishaka Pranjal" 
+                fill
+                priority
+                className="rounded-full object-cover border-4 border-white/10 hover:border-white/20 transition-all duration-300" 
+              />
+              <m.div 
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-500/20 to-sky-500/20"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.5, 0.8, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
             </div>
-            <div className="text-sm font-medium">Available for Work</div>
-          </div>
-        </div>
-        <div className="max-w-lg mx-auto gap-3">
-          <h1 className="font-serif text-3xl md:text-5xl text-center mt-8 tracking-wide whitespace-nowrap">
-            Hi, I&apos;m Kanishaka Pranjal
-          </h1>
+          </m.div>
 
-          {renderAnimatedTitle(currentTitleIndex)}
+          {/* Availability Badge */}
+          <m.div 
+            className="mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="bg-gradient-to-r from-emerald-500/10 to-sky-500/10 backdrop-blur-sm border border-white/10 px-6 py-3 rounded-2xl inline-flex items-center gap-3 hover:border-white/20 transition-all duration-300">
+              <div className="relative">
+                <div className="size-3 bg-emerald-500 rounded-full" />
+                <div className="absolute inset-0 size-3 bg-emerald-500 rounded-full animate-ping" />
+              </div>
+              <span className="text-sm font-medium bg-gradient-to-r from-emerald-400 to-sky-500 bg-clip-text text-transparent">
+                Available for Work
+              </span>
+            </div>
+          </m.div>
 
-          <p className="mt-4 text-center text-white/60 md:text-lg">
-            I&apos;m a <em>passionate</em> <strong>Full Stack Developer</strong>{" "}
-            &nbsp; specializing in{" "}
-            <strong>
-              Next.js
-            </strong>{" "}
-            and the{" "}
-            <strong>
-            MERN stack
-            </strong>
-            , with a focus on creating intuitive and engaging frontend
-            experiences. Proficient in
-            <strong>React.js</strong>, <strong>Next.js</strong>,{" "}
-            <strong>TypeScript</strong>, and <strong>Tailwind CSS</strong>, I
-            bring ideas to life with clean, efficient code and innovative
-            designs. Currently, I&apos;m honing my skills as a{" "}
-            <strong>Full Stack Development Intern</strong> at&nbsp;
-            <strong>
-            Intellify
-            </strong>
-            , working on dynamic projects using <strong>Next.js</strong>,{" "}
-            <strong>TypeScript</strong>, <strong>Supabase</strong>,{" "}
-            <strong>Firebase</strong>, and&nbsp;
-            <strong>PostgreSQL</strong>. I thrive on solving challenges,
-            collaborating with teams, and delivering{" "}
-            <strong>impactful solutions</strong> that elevate user experiences.
-          </p>
-        </div>
+          {/* Main Content */}
+          <m.div 
+            className="mt-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h1 className="font-serif text-3xl md:text-6xl  bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent py-2">
+              Hi, I&apos;m Kanishaka Pranjal
+            </h1>
+
+            <div className="h-16 md:h-20 flex items-center justify-center mt-4">
+              <AnimatePresence mode="wait">
+                {renderAnimatedTitle(currentTitleIndex)}
+              </AnimatePresence>
+            </div>
+
+            {/* Description */}
+            <m.p 
+              className="mt-6 text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              I&apos;m a <em>passionate</em> <strong>Full Stack Developer</strong>{" "}
+              specializing in <strong>Next.js</strong> and modern web technologies.
+              Currently crafting Gen AI-powered solutions at{" "}
+              <strong>Intellify</strong>, where innovation meets user experience.
+            </m.p>
+
+            {/* Social Links */}
+            <m.div 
+              className="flex justify-center gap-6 mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              {socialLinks.map((social, index) => (
+                <m.a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 ${social.color}`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <social.icon className="size-6" />
+                </m.a>
+              ))}
+            </m.div>
+          </m.div>
+
+          {/* Scroll Indicator */}
+          <m.div
+            className="py-8 left-1/2 -translate-x-1/2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.6, 
+              delay: 1,
+              repeat: Infinity,
+              repeatType: "reverse" 
+            }}
+          >
+            <HiArrowDown className="size-6 text-gray-400 animate-bounce" />
+          </m.div>
+        </m.div>
       </div>
     </div>
   );

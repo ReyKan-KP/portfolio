@@ -86,8 +86,10 @@ module.exports = {
   		},
   		animation: {
   			'ping-large': 'ping-large 1s ease-in-out infinite',
-  			'move-left': 'move-left 1s linear infinite',
-  			'move-right': 'move-right 1s linear infinite'
+  			'move-left': 'move-left 40s linear infinite',
+  			'move-right': 'move-right 40s linear infinite',
+  			'blob': 'blob 7s infinite',
+  			'pulse-slow': 'pulse 4s infinite',
   		},
   		keyframes: {
   			'ping-large': {
@@ -109,8 +111,14 @@ module.exports = {
   					transform: 'translateX(-50%)'
   				},
   				'100%': {
-  					transform: 'translateX(0%)'
+  					transform: 'translateX(0)'
   				}
+  			},
+  			blob: {
+  				'0%': { transform: 'translate(0px, 0px) scale(1)' },
+  				'33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+  				'66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+  				'100%': { transform: 'translate(0px, 0px) scale(1)' },
   			}
   		},
   		borderRadius: {

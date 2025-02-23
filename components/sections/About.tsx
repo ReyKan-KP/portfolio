@@ -42,7 +42,8 @@ import {
 } from "react-icons/si";
 import { RiFirebaseLine } from "react-icons/ri";
 import JsIcon from "@public/assets/icons/square-js.svg";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useInView } from "framer-motion";
 
 const toolboxItems = [
   {
@@ -205,93 +206,170 @@ const hobbies = [
   },
 ];
 
+// Add fade-in animation variants
+const fadeInVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
 export const AboutSection = () => {
   const constraintRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="py-20 lg:py-28">
       <div className="container">
-        <SectionHeader
-          eyebrow=" About Me"
-          title="A Glimpse Into My World"
-          description="I'm a software engineer with a passion for building digital products that solve real-world problems. I specialize in front-end development and have experience working with a variety of technologies."
-        />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          variants={fadeInVariants}
+        >
+          <SectionHeader
+            eyebrow="About Me"
+            title="A Glimpse Into My World"
+            description="I'm a software engineer with a passion for building digital products that solve real-world problems. I specialize in front-end development and have experience working with a variety of technologies."
+          />
+        </motion.div>
+
         <div className="mt-20 flex flex-col gap-8">
           <div className="grid grid-cols-1 gap-8 md:grid md:grid-cols-5 lg:grid-cols-3">
-            <Card className="h-[320px] md:col-span-2 lg:col-span-1">
-              <CardHeader
-                title="My Reads"
-                description="Explore the stories that fuel my creativity and shape my coding journey"
-              />
-              <div className="w-40 mx-auto mt-0">
-                <Image src={bookImage} alt="Book" />
-              </div>
-              {/* <div className="px-6 py-4">
-                <h3 className="font-bold text-lg">
-                  Omniscient Reader’s Viewpoint
-                </h3>
-                <p className="text-gray-700 mt-2">
-                  A captivating web novel that inspires me with its complex
-                  storytelling and strategic thinking. Just like in ORV, where
-                  the protagonist navigates a world full of challenges and
-                  unknowns, I approach full-stack development with the same
-                  resilience and adaptability.
-                </p>
-              </div> */}
-            </Card>
-
-            <Card className="h-[320px] p-0 md:col-span-3 lg:col-span-2">
-              <CardHeader
-                title="My Toolbox"
-                description="Explore the technologies and tools I use to craft exceptional digital experiences"
-                className="px-6 pt-6"
-              />
-              <ToolboxItems
-                toolboxItems={toolboxItems}
-                className="mt-6"
-                itemsWrapperClassName="animate-move-left [animation-duration:100s] [animation-delay:1s]"
-              />
-              <ToolboxItems
-                toolboxItems={toolboxItems}
-                className="mt-6 "
-                itemsWrapperClassName="animate-move-right [animation-duration:100s] [animation-delay:1s] "
-              />
-            </Card>
-          </div>
-          <div className="grid grid-cols-1 gap-8 md:grid md:grid-cols-5 lg:grid-cols-3">
-            <Card className=" h-[320px] p-0 flex flex-col md:col-span-3 lg:col-span-2">
-              <CardHeader
-                title="Beyond the Code"
-                description="Explore my interests and hobbies beyond the digital realm"
-                className="px-6 py-6"
-              />
-              <div className="relative flex-1" ref={constraintRef}>
-                {hobbies.map((hobby) => (
-                  <motion.div
-                    key={hobby.title}
-                    className={`inline-flex gap-2 px-6 py-1.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full items-center absolute ${hobby.styles.default} sm:${hobby.styles.sm}`}
-                    drag
-                    dragConstraints={constraintRef}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              variants={fadeInVariants}
+            >
+              <Tilt
+                tiltMaxAngleX={5}
+                tiltMaxAngleY={5}
+                scale={1.02}
+                transitionSpeed={2000}
+                className="h-full"
+              >
+                <Card className="h-[320px] md:col-span-2 lg:col-span-1 hover:shadow-xl transition-shadow duration-300 bg-gradient-to-r from-gray-800/50 to-gray-700/50 hover:from-gray-700/50 hover:to-gray-600/50 border border-white/5">
+                  <CardHeader
+                    title="My Reads"
+                    description="Explore the stories that fuel my creativity and shape my coding journey"
+                  />
+                  <motion.div 
+                    className="w-40 mx-auto mt-0"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <span className="font-medium text-gray-950">
-                      {hobby.title}
-                    </span>
-                    <span>{hobby.emoji}</span>
+                    <Image 
+                      src={bookImage} 
+                      alt="Book"
+                      className="w-full h-full object-contain drop-shadow-lg"
+                    />
                   </motion.div>
-                ))}
-              </div>
-            </Card>
-            <Card className="h-[320px] p-0 relative md:col-span-2 lg:col-span-1">
-              <Image
-                src={mapImage}
-                alt="Map"
-                className="h-full w-full object-cover object-left-top"
-              />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2  -translate-y-1/2 size-20 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full  after:content-[''] after:absolute after:inset-0 after:outline after:outline-2 after:-outline-offset-2 after:rounded-full after:outline-gray-950/30">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-20 animate-ping [animation-duration:2s]"></div>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-10 "></div>
-                <Image src={smileMemoji} alt="Memoji" />
-              </div>
-            </Card>
+                </Card>
+              </Tilt>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              variants={fadeInVariants}
+              className="md:col-span-3 lg:col-span-2"
+            >
+              <Card className="h-[320px] p-0 hover:shadow-xl transition-shadow duration-300">
+                <CardHeader
+                  title="My Toolbox"
+                  description="Explore the technologies and tools I use to craft exceptional digital experiences"
+                  className="px-6 pt-6"
+                />
+                <div className="relative overflow-hidden">
+                  <ToolboxItems
+                    toolboxItems={toolboxItems}
+                    className="mt-6"
+                    itemsWrapperClassName="animate-move-left [animation-duration:80s] hover:[animation-play-state:paused]"
+                  />
+                  <ToolboxItems
+                    toolboxItems={toolboxItems}
+                    className="mt-6"
+                    itemsWrapperClassName="animate-move-right [animation-duration:80s] hover:[animation-play-state:paused]"
+                  />
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid md:grid-cols-5 lg:grid-cols-3">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              variants={fadeInVariants}
+              className="md:col-span-3 lg:col-span-2"
+            >
+              <Card className="h-[320px] p-0 flex flex-col hover:shadow-xl transition-shadow duration-300">
+                <CardHeader
+                  title="Beyond the Code"
+                  description="Explore my interests and hobbies beyond the digital realm"
+                  className="px-6 py-6"
+                />
+                <div className="relative flex-1" ref={constraintRef}>
+                  {hobbies.map((hobby, index) => (
+                    <motion.div
+                      key={hobby.title}
+                      className={`inline-flex gap-2 px-6 py-1.5 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full items-center absolute ${hobby.styles.default} sm:${hobby.styles.sm} cursor-grab active:cursor-grabbing`}
+                      drag
+                      dragConstraints={constraintRef}
+                      whileHover={{ scale: 1.1 }}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                    >
+                      <span className="font-medium text-gray-950">
+                        {hobby.title}
+                      </span>
+                      <span className="animate-bounce">{hobby.emoji}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              variants={fadeInVariants}
+              className="md:col-span-2 lg:col-span-1"
+            >
+              <Card className="h-[320px] p-0 relative overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <Image
+                  src={mapImage}
+                  alt="Map"
+                  className="h-full w-full object-cover object-left-top transition-transform duration-300 hover:scale-110"
+                />
+                <motion.div 
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-20 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full"
+                  whileHover={{ scale: 1.1 }}
+                  animate={{ 
+                    y: [0, -10, 0],
+                  }}
+                  transition={{ 
+                    y: {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
+                >
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-20 animate-ping [animation-duration:2s]"></div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-300 to-sky-400 -z-10"></div>
+                  <Image src={smileMemoji} alt="Memoji" className="hover:rotate-12 transition-transform duration-300" />
+                </motion.div>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </div>

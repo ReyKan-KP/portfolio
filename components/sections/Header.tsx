@@ -3,23 +3,68 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
-import { HiOutlineMenuAlt3, HiOutlineX } from "react-icons/hi";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const menuItems = [
-  { href: "#home", label: "Home" },
-  { href: "#work", label: "Work Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#achievement", label: "Achievement" },
-  { href: "#contact", label: "Contact" },
+  { 
+    href: "#home", 
+    label: "Home",
+    description: "Back to homepage",
+    icon: "🏠"
+  },
+  { 
+    href: "#work", 
+    label: "Work Experience",
+    description: "View my professional experience",
+    icon: "💼"
+  },
+  { 
+    href: "#projects", 
+    label: "Projects",
+    description: "Check out my portfolio projects",
+    icon: "🚀"
+  },
+  { 
+    href: "#about", 
+    label: "About",
+    description: "Learn more about me",
+    icon: "👨‍💻"
+  },
+  { 
+    href: "#testimonials", 
+    label: "Testimonials",
+    description: "What others say about my work",
+    icon: "💬"
+  },
+  { 
+    href: "#achievement", 
+    label: "Achievement",
+    description: "My accomplishments and certifications",
+    icon: "🏆"
+  },
+  { 
+    href: "#contact", 
+    label: "Contact",
+    description: "Get in touch with me",
+    icon: "📧"
+  },
 ];
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [scrollY, setScrollY] = useState(0);
+  const [hoveredItem, setHoveredItem] = useState<string | null>("hero");
+  const [hoveredNav, setHoveredNav] = useState<string | null>(
+    "hero"
+  );
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -49,150 +94,290 @@ export const Header = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId.slice(1));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setIsOpen(false);
+  };
+
   return (
     <LazyMotion features={domAnimation}>
-      <m.div
+      <m.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-gray-900 to-transparent pb-8"
-        style={{
-          background: `linear-gradient(to bottom, rgba(17, 24, 39, ${Math.min(
-            scrollY / 500,
-            0.9
-          )}), transparent)`,
-        }}
+        transition={{ type: "spring", stiffness: 100 }}
+        className="fixed top-0 sm:top-2 md:top-5 lg:top-10 left-0 sm:left-2 md:left-5 lg:left-10 right-0 sm:right-2 md:right-5 lg:right-10 z-50 px-4 sm:px-6 py-2 rounded-full bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg shadow-lg border border-white/20"
       >
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto flex items-center justify-between h-12 sm:h-14 max-w-7xl">
+          {/* Logo */}
           <m.div
-            initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="flex items-center space-x-2"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center space-x-4"
           >
-            <Image
-              src="/images/kanishaka-pranjal-high-resolution-logo-transparent.png"
-              alt="Logo"
-              width={40}
-              height={40}
-              // className="rounded-full"
-            />
+            <Link href="/" className="relative w-8 h-8 sm:w-10 sm:h-10">
+              <Image
+                src="/images/kanishaka-pranjal-high-resolution-logo-transparent.png"
+                alt="Logo"
+                fill
+                priority
+                className="object-contain"
+              />
+            </Link>
           </m.div>
 
-          <nav className="hidden md:flex space-x-1">
-            <AnimatePresence>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            
+            <TooltipProvider>
+              {menuItems.map((item) => (
+                <div 
+                  key={item.href}
+                  className="relative"
+                  onMouseEnter={() => setHoveredNav(item.href)}
+                  onMouseLeave={() => setHoveredNav(null)}
+                >
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <m.button
+                        onClick={() => scrollToSection(item.href)}
+                        className={`relative px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-300
+                          ${activeSection === item.href.slice(1)
+                            ? "text-white bg-teal-500"
+                            : "text-teal-500 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400"
+                          }`}
+                        onHoverStart={() => setHoveredItem(item.href)}
+                        onHoverEnd={() => setHoveredItem(null)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <span className="flex items-center gap-1 sm:gap-2">
+                          <span className="text-base">{item.icon}</span>
+                          <span className="hidden sm:inline">{item.label}</span>
+                        </span>
+                        {hoveredItem === item.href && (
+                          <m.div
+                            className="absolute inset-0 bg-teal-500/10 rounded-full -z-10"
+                            layoutId="hoverBackground"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                          />
+                        )}
+                      </m.button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{item.description}</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  {/* Anime Mascot Animation */}
+                  {activeSection === item.href.slice(1) && (
+                    <m.div
+                      layoutId="anime-mascot"
+                      className="absolute hidden md:block -top-8 lg:-top-10 left-1/2 -translate-x-1/2 pointer-events-none"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 30,
+                      }}
+                    >
+                      <div className="relative w-12 h-12">
+                        <m.div
+                          className="absolute w-10 h-10 bg-[#cdbcff] rounded-full left-1/2 -translate-x-1/2"
+                          animate={
+                            hoveredNav === item.href
+                              ? {
+                                  scale: [1, 1.1, 1],
+                                  rotate: [0, -5, 5, 0],
+                                  transition: {
+                                    duration: 0.5,
+                                    ease: "easeInOut",
+                                  },
+                                }
+                              : {
+                                  y: [0, -3, 0],
+                                  transition: {
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                  },
+                                }
+                          }
+                        >
+                          {/* Eyes */}
+                          <m.div
+                            className="absolute w-2 h-2 bg-black rounded-full"
+                            animate={
+                              hoveredNav === item.href
+                                ? {
+                                    scaleY: [1, 0.2, 1],
+                                    transition: {
+                                      duration: 0.2,
+                                      times: [0, 0.5, 1],
+                                    },
+                                  }
+                                : {}
+                            }
+                            style={{ left: "25%", top: "40%" }}
+                          />
+                          <m.div
+                            className="absolute w-2 h-2 bg-black rounded-full"
+                            animate={
+                              hoveredNav === item.href
+                                ? {
+                                    scaleY: [1, 0.2, 1],
+                                    transition: {
+                                      duration: 0.2,
+                                      times: [0, 0.5, 1],
+                                    },
+                                  }
+                                : {}
+                            }
+                            style={{ right: "25%", top: "40%" }}
+                          />
+
+                          {/* Blush */}
+                          <m.div
+                            className="absolute w-2 h-1.5 bg-pink-300 rounded-full"
+                            animate={{
+                              opacity: hoveredNav === item.href ? 0.8 : 0.6,
+                            }}
+                            style={{ left: "15%", top: "55%" }}
+                          />
+                          <m.div
+                            className="absolute w-2 h-1.5 bg-pink-300 rounded-full"
+                            animate={{
+                              opacity: hoveredNav === item.href ? 0.8 : 0.6,
+                            }}
+                            style={{ right: "15%", top: "55%" }}
+                          />
+
+                          {/* Mouth */}
+                          <m.div
+                            className="absolute w-4 h-2 border-b-2 border-black rounded-full"
+                            animate={
+                              hoveredNav === item.href
+                                ? {
+                                    scaleY: 1.5,
+                                    y: -1,
+                                  }
+                                : {
+                                    scaleY: 1,
+                                    y: 0,
+                                  }
+                            }
+                            style={{ left: "30%", top: "60%" }}
+                          />
+
+                          {/* Sparkles */}
+                          <AnimatePresence>
+                            {hoveredNav === item.href && (
+                              <>
+                                <m.div
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0, scale: 0 }}
+                                  className="absolute -top-1 -right-1 w-2 h-2 text-yellow-300"
+                                >
+                                  ✨
+                                </m.div>
+                                <m.div
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0, scale: 0 }}
+                                  transition={{ delay: 0.1 }}
+                                  className="absolute -top-2 left-0 w-2 h-2 text-yellow-300"
+                                >
+                                  ✨
+                                </m.div>
+                              </>
+                            )}
+                          </AnimatePresence>
+                        </m.div>
+                        
+                        {/* Tail */}
+                        <m.div
+                          className="absolute -bottom-1 left-1/2 w-4 h-4 -translate-x-1/2"
+                          animate={
+                            hoveredNav === item.href
+                              ? {
+                                  y: [0, -4, 0],
+                                  transition: {
+                                    duration: 0.3,
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                  },
+                                }
+                              : {
+                                  y: [0, 2, 0],
+                                  transition: {
+                                    duration: 1,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: 0.5,
+                                  },
+                                }
+                          }
+                        >
+                          <div className="w-full h-full bg-[#cdbcff] rotate-45 transform origin-center" />
+                        </m.div>
+                      </div>
+                    </m.div>
+                  )}
+                </div>
+              ))}
+            </TooltipProvider>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <m.button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-1.5 sm:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+          </m.button>
+        </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <m.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-full left-0 right-0 mt-2 p-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 md:hidden"
+            >
               {menuItems.map((item, index) => (
                 <m.div
                   key={item.href}
-                  variants={navItemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20,
-                    delay: index * 0.05,
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: 50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="py-2"
                 >
-                  <Link
-                    href={item.href}
-                    className={`nav-item text-sm px-3 py-2 rounded-full transition-all duration-300 relative overflow-hidden ${
-                      activeSection === item.href.slice(1)
-                        ? "bg-teal-500 text-white"
-                        : "text-gray-300 hover:text-white"
-                    }`}
+                  <button
+                    onClick={() => {
+                      scrollToSection(item.href);
+                      toggleMenu();
+                    }}
+                    className="flex items-center space-x-3 w-full text-left text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400"
                   >
-                    <span className="relative z-10">{item.label}</span>
-                    <m.span
-                      className="absolute inset-0 bg-gradient-to-r from-teal-500 to-blue-500 opacity-0 transition-opacity duration-300 rounded-full"
-                      initial={false}
-                      animate={
-                        activeSection === item.href.slice(1)
-                          ? { opacity: 1 }
-                          : { opacity: 0 }
-                      }
-                    />
-                  </Link>
+                    <span className="text-xl">{item.icon}</span>
+                    <span className="text-base">{item.label}</span>
+                  </button>
                 </m.div>
               ))}
-            </AnimatePresence>
-          </nav>
-
-          <div className="md:hidden">
-            <m.button
-              onClick={toggleMenu}
-              className="text-white p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {isOpen ? (
-                  <m.div
-                    key="close"
-                    initial={{ rotate: 0 }}
-                    animate={{ rotate: 180 }}
-                    exit={{ rotate: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <HiOutlineX size={24} />
-                  </m.div>
-                ) : (
-                  <m.div
-                    key="menu"
-                    initial={{ rotate: 180 }}
-                    animate={{ rotate: 0 }}
-                    exit={{ rotate: 180 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <HiOutlineMenuAlt3 size={24} />
-                  </m.div>
-                )}
-              </AnimatePresence>
-            </m.button>
-          </div>
-        </div>
-      </m.div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <m.div
-            initial={{ x: "100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "100%", opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 h-full w-full sm:w-64 bg-gradient-to-b from-gray-800 to-gray-900 text-white shadow-lg flex flex-col items-center justify-center gap-4 z-40"
-          >
-            {menuItems.map((item, index) => (
-              <m.div
-                key={item.href}
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  href={item.href}
-                  className="nav-item text-lg hover:text-teal-400 transition-colors relative group"
-                  onClick={toggleMenu}
-                >
-                  {item.label}
-                  <m.span
-                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-teal-400 group-hover:w-full transition-all duration-300"
-                    initial={false}
-                    animate={
-                      activeSection === item.href.slice(1)
-                        ? { width: "100%" }
-                        : { width: 0 }
-                    }
-                  />
-                </Link>
-              </m.div>
-            ))}
-          </m.div>
-        )}
-      </AnimatePresence>
+            </m.div>
+          )}
+        </AnimatePresence>
+      </m.nav>
     </LazyMotion>
   );
 };
