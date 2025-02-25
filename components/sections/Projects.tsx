@@ -9,6 +9,8 @@ import SectionHeader from "@components/SectionHeader";
 import { motion, Variants } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { Globe } from "lucide-react";
+import { useState } from "react";
+
 const portfolioProjects = [
   {
     "name": "FableWeaver.ai",
@@ -193,8 +195,17 @@ const cardVariants: Variants = {
 };
 
 export const ProjectsSection = () => {
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: string]: boolean }>({});
+
+  const toggleDescription = (projectName: string) => {
+    setExpandedDescriptions(prev => ({
+      ...prev,
+      [projectName]: !prev[projectName]
+    }));
+  };
+
   return (
-    <section className="pb-16 lg:py-24">
+    <section className="pb-8 sm:pb-16 lg:py-24">
       <div className="container">
         <SectionHeader
           eyebrow="Real-world Results"
@@ -202,7 +213,7 @@ export const ProjectsSection = () => {
           description="See how I transformed concepts into engaging projects"
         />
         <motion.div 
-          className="flex flex-col mt-10 md:mt-20 gap-20"
+          className="flex flex-col mt-6 sm:mt-10 md:mt-20 gap-10 sm:gap-20 "
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.1 }}
@@ -210,7 +221,7 @@ export const ProjectsSection = () => {
           {portfolioProjects.map((project, projectIndex) => (
             <div
               key={project.name}
-              className="px-8 pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky"
+              className="px-4 pt-4 sm:px-8 sm:pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky"
               style={{ top: `calc(64px + ${projectIndex * 40}px)` }}
             >
               <motion.div 
@@ -227,19 +238,19 @@ export const ProjectsSection = () => {
                   ></div>
 
                   <div>
-                    <div className="flex justify-between items-center mb-4">
-                      <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
+                    <div className="flex flex-col gap-3 mb-3 sm:mb-4">
+                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-wider sm:tracking-widest gap-2 text-transparent bg-clip-text break-words">
                         {project.name}
                       </h3>
-                      <div className="flex flex-wrap">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
                         <Link
                           href={project.live_site_link}
                           passHref
                           legacyBehavior
                         >
-                          <a target="_blank" rel="noopener noreferrer">
-                            <span className="flex items-center text-sm text-white/70 hover:text-white">
-                              <Globe className="mr-2" />
+                          <a target="_blank" rel="noopener noreferrer" className="w-fit">
+                            <span className="flex items-center text-xs sm:text-sm text-white/70 hover:text-white">
+                              <Globe className="mr-1 sm:mr-2 w-4 h-4" />
                               Live-Site
                             </span>
                           </a>
@@ -249,45 +260,55 @@ export const ProjectsSection = () => {
                           passHref
                           legacyBehavior
                         >
-                          <a target="_blank" rel="noopener noreferrer">
-                            <span className="flex items-center text-sm text-white/70 hover:text-white">
-                              <FaGithub className="mr-2" />
+                          <a target="_blank" rel="noopener noreferrer" className="w-fit">
+                            <span className="flex items-center text-xs sm:text-sm text-white/70 hover:text-white">
+                              <FaGithub className="mr-1 sm:mr-2 w-4 h-4" />
                               GitHub
                             </span>
                           </a>
                         </Link>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-2 mb-2">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2">
                       {project.tags.map((tag, index) => (
                         <span
                           key={index}
-                          className={`text-sm font-medium ${tag.color}`}
+                          className={`text-xs sm:text-sm font-medium ${tag.color}`}
                         >
                           #{tag.name}
                         </span>
                       ))}
                     </div>
-                    <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
+                    <hr className="border-t-2 border-white/5 mt-3 sm:mt-4 md:mt-5" />
                     <div className="lg:flex lg:items-center lg:gap-10">
-                      <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
-                        {project.description.map((desc, index) => (
-                          <li
-                            key={index}
-                            className="flex gap-2 text-sm md:text-base text-white/50"
+                      <div className="relative">
+                        <ul className={`flex flex-col gap-3 sm:gap-5 mt-3 sm:mt-4 md:mt-5 lg:flex-1 ${!expandedDescriptions[project.name] ? 'max-h-[120px] sm:max-h-[150px] overflow-hidden' : ''}`}>
+                          {project.description.map((desc, index) => (
+                            <li
+                              key={index}
+                              className="flex gap-2 text-xs sm:text-sm md:text-base text-white/50"
+                            >
+                              <CheckCircleIcon className="size-4 sm:size-5 md:size-6 flex-shrink-0" />
+                              <span>{desc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {project.description.length > 2 && (
+                          <button
+                            onClick={() => toggleDescription(project.name)}
+                            className="mt-2 text-xs sm:text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
                           >
-                            <CheckCircleIcon className="size-5 md:size-6" />
-                            <span>{desc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                        <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
+                            {expandedDescriptions[project.name] ? 'Show Less' : 'Show More'}
+                          </button>
+                        )}
+                      </div>
+                      <div className="mt-6 sm:mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
+                        <div className="relative h-48 sm:h-60 md:h-80 lg:h-96">
                           <Image
                             src={project.image}
                             alt={project.name}
-                            className="rounded-3xl object-cover w-full h-full"
-                            style={{ objectFit: "cover" }}
+                            className="rounded-2xl sm:rounded-3xl object-contain w-full h-full"
+                            style={{ objectFit: "contain" }}
                             fill
                           />
                         </div>

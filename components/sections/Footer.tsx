@@ -64,7 +64,7 @@ const footerLinks = [
 
 export const Footer = () => {
   return (
-    <footer className="relative pt-32 pb-16 px-4 overflow-hidden">
+    <footer className="relative pt-16 sm:pt-32 pb-8 sm:pb-16 px-4 overflow-hidden">
       {/* Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
         {/* <div className="absolute top-0 left-1/4 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl"></div>
@@ -72,7 +72,7 @@ export const Footer = () => {
       </div>
 
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-16">
           {/* Logo & Description */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -81,31 +81,31 @@ export const Footer = () => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2"
           >
-            <Link href="/" className="inline-block mb-6">
+            <Link href="/" className="inline-block mb-4 sm:mb-6">
               <Image
                 src="/images/kanishaka-pranjal-high-resolution-logo-transparent.png"
                 alt="Logo"
                 width={150}
                 height={40}
-                className="h-10 w-auto"
+                className="h-8 sm:h-10 w-auto"
               />
             </Link>
-            <p className="text-gray-400 mb-8 max-w-md">
+            <p className="text-gray-400 mb-6 sm:mb-8 max-w-md text-sm sm:text-base">
               Passionate Full Stack Developer specializing in Next.js and modern web technologies. 
               Building innovative solutions with clean, efficient code and exceptional user experiences.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3 sm:gap-4 justify-center sm:justify-start">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.name}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 ${social.color}`}
+                  className={`p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 ${social.color}`}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </motion.a>
               ))}
             </div>
@@ -119,16 +119,17 @@ export const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="text-center sm:text-left"
             >
-              <h3 className="font-medium text-lg mb-6 bg-gradient-to-r from-emerald-300 to-sky-400 bg-clip-text text-transparent">
+              <h3 className="font-medium text-base sm:text-lg mb-4 sm:mb-6 bg-gradient-to-r from-emerald-300 to-sky-400 bg-clip-text text-transparent">
                 {section.title}
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-3 sm:space-y-4">
                 {section.links.map((link) => (
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-white transition-colors duration-300"
+                      className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base"
                     >
                       {link.name}
                     </Link>
@@ -145,22 +146,22 @@ export const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="pt-8 mt-8 border-t border-white/10"
+          className="pt-6 sm:pt-8 mt-6 sm:mt-8 border-t border-white/10"
         >
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm text-center md:text-left">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
               © {new Date().getFullYear()} Kanishaka Pranjal. All rights reserved.
             </p>
-            <div className="flex gap-6">
+            <div className="flex gap-4 sm:gap-6">
               <Link 
                 href="/privacy" 
-                className="text-sm text-gray-400 hover:text-white transition-colors duration-300"
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300"
               >
                 Privacy Policy
               </Link>
               <Link 
                 href="/terms" 
-                className="text-sm text-gray-400 hover:text-white transition-colors duration-300"
+                className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors duration-300"
               >
                 Terms of Service
               </Link>

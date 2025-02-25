@@ -108,15 +108,15 @@ export const Header = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className="fixed top-0 sm:top-2 md:top-5 lg:top-10 left-0 sm:left-2 md:left-5 lg:left-10 right-0 sm:right-2 md:right-5 lg:right-10 z-50 px-4 sm:px-6 py-2 rounded-full bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg shadow-lg border border-white/20"
+        className="fixed top-0 sm:top-2 md:top-5 lg:top-10 left-0 sm:left-2 md:left-5 lg:left-10 right-0 sm:right-2 md:right-5 lg:right-10 z-50 px-4 sm:px-6 py-2 rounded-full bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg shadow-lg border border-white/20 max-w-6xl mx-auto"
       >
-        <div className="container mx-auto flex items-center justify-between h-12 sm:h-14 max-w-7xl">
+        <div className="container flex items-center justify-between h-12 sm:h-14">
           {/* Logo */}
           <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center space-x-4"
+            className=" flex items-center justify-start pr-10"
           >
             <Link href="/" className="relative w-8 h-8 sm:w-10 sm:h-10">
               <Image
@@ -130,7 +130,7 @@ export const Header = () => {
           </m.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-4">
             
             <TooltipProvider>
               {menuItems.map((item) => (
@@ -352,7 +352,8 @@ export const Header = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 right-0 mt-2 p-4 bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 md:hidden"
+              className="absolute top-full left-0 right-0 mt-2 p-4 bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg shadow-lg border border-white/20
+              rounded-2xl md:hidden"
             >
               {menuItems.map((item, index) => (
                 <m.div
@@ -367,7 +368,7 @@ export const Header = () => {
                       scrollToSection(item.href);
                       toggleMenu();
                     }}
-                    className="flex items-center space-x-3 w-full text-left text-gray-600 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400"
+                    className="flex items-center space-x-3 w-full text-left text-teal-500 dark:text-gray-300 hover:text-teal-500 dark:hover:text-teal-400"
                   >
                     <span className="text-xl">{item.icon}</span>
                     <span className="text-base">{item.label}</span>

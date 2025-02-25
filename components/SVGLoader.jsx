@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import './SVGLoader.css'; // Import the CSS file
-
+import { AnimatedGradient } from "@components/ui/animated-gradient";
 const draw = {
   hidden: { pathLength: 0, opacity: 0 },
   visible: (i) => {
@@ -20,6 +20,13 @@ const draw = {
 const SVGLoader = () => {
   return (
     <div className="svg-container">
+              {/* Fixed background gradient */}
+        <div className="fixed inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 -z-10" />
+        
+        {/* Animated background elements */}
+        <div className="fixed inset-0 -z-5">
+          <AnimatedGradient />
+        </div>
       <motion.svg
         className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96"
         viewBox="0 0 600 600"

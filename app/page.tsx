@@ -13,7 +13,7 @@ import Loading from "@components/Loading";
 import { Testimonials } from "@components/sections/Testimonials";
 import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion";
 import { Footer } from "@components/sections/Footer";
-import { AnimatedGradient } from "@components/ui/components/ui/animated-gradient";
+import { AnimatedGradient } from "@components/ui/animated-gradient";
 // Remove or comment out the smooth-scroll library code since we'll use native behavior
 // if (typeof window !== 'undefined') {
 //   require('smooth-scroll')('a[href*="#"]', {
@@ -92,8 +92,10 @@ export default function Home() {
         <div className="fixed inset-0 -z-5">
           <AnimatedGradient />
         </div>
-
+        <div className="z-50000">
         <Header />
+        </div>
+          
         <SocialIcons />
 
         <AnimatePresence mode="wait">

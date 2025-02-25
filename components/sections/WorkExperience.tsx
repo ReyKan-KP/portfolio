@@ -15,6 +15,8 @@ import {
   FaNodeJs,
   FaGitAlt,
   FaStar,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 import {
   SiTypescript,
@@ -85,7 +87,7 @@ const workExperience: WorkExperience = {
       icon: SiPostgresql,
       color: "text-blue-300",
     },
-    { name: "Firebase", level: 4.5, icon: SiFirebase, color: "text-yellow-400" },
+    // { name: "Firebase", level: 4.5, icon: SiFirebase, color: "text-yellow-400" },
     { name: "AI Integration", level: 4, icon: SiOpenai, color: "text-gray-500" },
   ],
 };
@@ -95,6 +97,7 @@ const WorkExperienceSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
     "overview" | "responsibilities" | "skills"
   >("overview");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const tabVariants = {
     inactive: { scale: 1 },
@@ -124,8 +127,13 @@ const WorkExperienceSection: React.FC = () => {
     );
   };
 
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength || isExpanded) return text;
+    return text.slice(0, maxLength) + "...";
+  };
+
   return (
-    <section className="relative py-12 lg:py-20 overflow-hidden">
+    <section className="relative py-6 sm:py-12 lg:py-20 overflow-hidden">
       {/* Background Elements */}
       {/* <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
         <div className="absolute inset-0 opacity-20">
@@ -137,40 +145,40 @@ const WorkExperienceSection: React.FC = () => {
       <div className="absolute inset-0 -z-10 opacity-10 mix-blend-overlay"
                  style={{ backgroundImage: `url(${grainImage.src})` }} />
 
-      <div className="container max-w-5xl mx-auto px-4 relative">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 relative max-w-[95%] sm:max-w-5xl">
         <SectionHeader
           eyebrow="Professional Journey"
           title="Work Experience"
           description="Dive into my internship experience and the skills I've developed along the way."
         />
         
-        <div className="mt-12">
+        <div className="mt-4 sm:mt-8">
           <Card className="backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-500">
-            <div className="p-4 md:p-8">
+            <div className="p-3 sm:p-4 md:p-6 lg:p-8">
               {/* Company Header */}
-              <div className="flex flex-col md:flex-row items-center mb-8 relative">
+              <div className="flex flex-col md:flex-row items-center mb-4 sm:mb-6 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-sky-500/10 blur-2xl"></div>
                 <motion.div 
-                  className="bg-gradient-to-r from-emerald-400 to-sky-500 p-4 rounded-xl mb-4 md:mb-0 md:mr-6"
+                  className="bg-gradient-to-r from-emerald-400 to-sky-500 p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl mb-3 md:mb-0 md:mr-6"
                   whileHover={{ rotate: 12, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <FaBriefcase className="text-gray-900 text-4xl" />
+                  <FaBriefcase className="text-gray-900 text-xl sm:text-2xl md:text-4xl" />
                 </motion.div>
                 <div className="text-center md:text-left z-10">
                   <motion.h3 
-                    className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-3"
+                    className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-2"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                   >
                     {workExperience.title}
                   </motion.h3>
-                  <div className="space-y-2">
-                    <p className="text-xl text-gray-300 font-medium">
+                  <div className="space-y-1 sm:space-y-2">
+                    <p className="text-sm sm:text-base md:text-xl text-gray-300 font-medium">
                       {workExperience.company}
                     </p>
-                    <p className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/20 to-sky-500/20 border border-white/10 text-gray-300">
+                    <p className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-emerald-500/20 to-sky-500/20 border border-white/10 text-xs sm:text-sm">
                       {workExperience.duration}
                     </p>
                   </div>
@@ -178,8 +186,8 @@ const WorkExperienceSection: React.FC = () => {
               </div>
 
               {/* Navigation Tabs */}
-              <div className="flex justify-center mb-8">
-                <div className="grid grid-cols-3 gap-4 w-full max-w-2xl backdrop-blur-sm bg-white/5 p-3 rounded-xl">
+              <div className="flex justify-center mb-4 sm:mb-6">
+                <div className="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-2xl backdrop-blur-sm bg-white/5 p-1.5 sm:p-2 rounded-lg">
                   {[
                     {
                       key: "overview",
@@ -190,16 +198,14 @@ const WorkExperienceSection: React.FC = () => {
                     {
                       key: "responsibilities",
                       icon: FaLaptopCode,
-                      label: "Responsibilities",
-                      bgColor:
-                        "bg-gradient-to-r from-blue-400 via-teal-500 to-sky-600",
+                      label: "Tasks",
+                      bgColor: "bg-gradient-to-r from-blue-400 via-teal-500 to-sky-600",
                     },
                     {
                       key: "skills",
                       icon: FaDatabase,
-                      label: "Tech Stack",
-                      bgColor:
-                        "bg-gradient-to-r from-sky-400 via-blue-500 to-teal-500",
+                      label: "Skills",
+                      bgColor: "bg-gradient-to-r from-sky-400 via-blue-500 to-teal-500",
                     },
                   ].map((tab) => (
                     <motion.div
@@ -211,15 +217,16 @@ const WorkExperienceSection: React.FC = () => {
                     >
                       <Button
                         variant={activeTab === tab.key ? "default" : "outline"}
-                        className={`w-full h-11 ${
+                        className={`w-full h-8 sm:h-9 md:h-11 ${
                           activeTab === tab.key 
                             ? `${tab.bgColor} shadow-lg` 
                             : "hover:bg-white/10 border-white/10"
-                        } transition-all duration-300 text-base font-medium`}
+                        } transition-all duration-300 text-[10px] sm:text-xs md:text-sm font-medium`}
                         onClick={() => setActiveTab(tab.key as typeof activeTab)}
                       >
-                        <tab.icon className={`mr-2 text-lg ${activeTab === tab.key ? 'animate-bounce' : ''}`} />
-                        {tab.label}
+                        <tab.icon className={`mr-1 sm:mr-2 text-sm sm:text-base md:text-lg ${activeTab === tab.key ? 'animate-bounce' : ''}`} />
+                        {/* <span className="hidden xs:inline">{tab.label}</span> */}
+                        <span className="">{tab.label}</span>
                       </Button>
                     </motion.div>
                   ))}
@@ -234,11 +241,11 @@ const WorkExperienceSection: React.FC = () => {
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="min-h-[300px] p-6 backdrop-blur-xl bg-white/5 rounded-xl border border-white/10"
+                  className="min-h-[250px] sm:min-h-[300px] p-3 sm:p-4 md:p-6 backdrop-blur-xl bg-white/5 rounded-lg border border-white/10"
                 >
                   {activeTab === "overview" && (
                     <motion.p 
-                      className="text-gray-300 text-lg leading-relaxed"
+                      className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.2 }}
@@ -248,54 +255,56 @@ const WorkExperienceSection: React.FC = () => {
                   )}
                   
                   {activeTab === "responsibilities" && (
-                    <ul className="space-y-6">
-                      {workExperience.responsibilities.map((resp, index) => (
+                    <motion.ul 
+                      className="space-y-2 sm:space-y-3"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {workExperience.responsibilities.map((responsibility, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-start text-gray-300 group hover:bg-white/5 p-3 rounded-lg transition-all duration-300"
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
+                          transition={{ delay: 0.1 * index }}
+                          className="flex items-start gap-2 sm:gap-3"
                         >
-                          <div className="bg-gradient-to-r from-emerald-500/20 to-sky-500/20 p-2 rounded-lg mr-3">
-                            <FaServer className="text-emerald-400 text-lg group-hover:rotate-12 transition-transform duration-300" />
+                          <div className="mt-1 flex-shrink-0">
+                            <div className="size-1.5 sm:size-2 rounded-full bg-gradient-to-r from-emerald-400 to-sky-500" />
                           </div>
-                          <span className="text-base group-hover:text-white transition-colors duration-300">
-                            {resp}
-                          </span>
+                          <p className="text-xs sm:text-sm md:text-base text-gray-300">
+                            {truncateText(responsibility, 100)}
+                          </p>
                         </motion.li>
                       ))}
-                    </ul>
+                    </motion.ul>
                   )}
 
                   {activeTab === "skills" && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <motion.div 
+                      className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
                       {workExperience.skills.map((skill, index) => (
                         <motion.div
-                          key={index}
-                          className="group"
+                          key={skill.name}
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: index * 0.1 }}
+                          transition={{ delay: 0.1 * index }}
+                          className="flex flex-col items-center p-2 sm:p-3 md:p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
                         >
-                          <div className="p-4 rounded-lg bg-gradient-to-r from-gray-800/50 to-gray-700/50 hover:from-gray-700/50 hover:to-gray-600/50 border border-white/5 transition-all duration-300">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center">
-                                <div className="p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors duration-300">
-                                  <skill.icon
-                                    className={`${skill.color} text-xl group-hover:scale-125 transition-transform duration-300`}
-                                  />
-                                </div>
-                                <span className="ml-3 text-base text-gray-300 font-medium">
-                                  {skill.name}
-                                </span>
-                              </div>
-                              <StarRating rating={skill.level} color={skill.color} />
-                            </div>
+                          <skill.icon className={`text-xl sm:text-2xl md:text-3xl ${skill.color} mb-1 sm:mb-2`} />
+                          <p className="text-[10px] sm:text-xs md:text-sm text-gray-300 text-center mb-1">
+                            {skill.name}
+                          </p>
+                          <div className="scale-50 sm:scale-75 md:scale-100">
+                            <StarRating rating={skill.level} color={skill.color} />
                           </div>
                         </motion.div>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
                 </motion.div>
               </AnimatePresence>

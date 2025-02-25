@@ -234,7 +234,7 @@ export const AboutSection = () => {
         </motion.div>
 
         <div className="mt-20 flex flex-col gap-8">
-          <div className="grid grid-cols-1 gap-8 md:grid md:grid-cols-5 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -249,7 +249,7 @@ export const AboutSection = () => {
                 transitionSpeed={2000}
                 className="h-full"
               >
-                <Card className="h-[320px] md:col-span-2 lg:col-span-1 hover:shadow-xl transition-shadow duration-300 bg-gradient-to-r from-gray-800/50 to-gray-700/50 hover:from-gray-700/50 hover:to-gray-600/50 border border-white/5">
+                <Card className="h-[320px] col-span-2 hover:shadow-xl transition-shadow duration-300 bg-gradient-to-r from-gray-800/50 to-gray-700/50 hover:from-gray-700/50 hover:to-gray-600/50 border border-white/5">
                   <CardHeader
                     title="My Reads"
                     description="Explore the stories that fuel my creativity and shape my coding journey"
@@ -354,7 +354,7 @@ export const AboutSection = () => {
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-20 bg-gradient-to-r from-emerald-300 to-sky-400 rounded-full"
                   whileHover={{ scale: 1.1 }}
                   animate={{ 
-                    y: [0, -10, 0],
+                    y: [0, -20, 0],
                   }}
                   transition={{ 
                     y: {
