@@ -189,7 +189,7 @@ export const ContactSection = () => {
                           icon={<MessageSquare className="h-4 sm:h-5 w-4 sm:w-5" />}
                           title="Social"
                           value="Connect on LinkedIn"
-                          link="https://linkedin.com/in/yourusername"
+                          link="https://www.linkedin.com/in/kanishaka-pranjal-070a45235/"
                           color="from-violet-500/20 to-indigo-500/20"
                         />
                       </motion.div>
