@@ -197,7 +197,7 @@ export default function Home() {
               <Testimonials />
             </section>
 
-            <section id="achievement" className="min-h-screen min-w-screen">
+            <section id="achievement" className="min-h-screen min-w-screen pt-20">
               <AchievementsList />
             </section>
 

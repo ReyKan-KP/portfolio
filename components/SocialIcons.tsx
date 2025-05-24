@@ -70,10 +70,10 @@ function SocialIcons() {
   ];
 
   const containerVariants = {
-    hidden: { opacity: 0, x: -20 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
-      x: 0,
+      y: 0,
       transition: {
         duration: 0.8,
         staggerChildren: 0.1,
@@ -83,10 +83,10 @@ function SocialIcons() {
   };
 
   const iconVariants = {
-    hidden: { opacity: 0, x: -20, rotate: -10 },
+    hidden: { opacity: 0, y: 10, rotate: -10 },
     visible: (i: number) => ({
       opacity: 1,
-      x: 0,
+      y: 0,
       rotate: 0,
       transition: {
         type: "spring",
@@ -99,13 +99,15 @@ function SocialIcons() {
 
   return (
     <motion.div
-      className="fixed top-1/2 left-5 sm:left-6 md:left-8 lg:left-12 transform -translate-y-1/2 flex flex-col items-center gap-4 sm:gap-5 md:gap-6 z-30"
+      className="fixed md:top-1/2 md:left-5 sm:left-6 md:left-8 lg:left-12 md:-translate-y-1/2 
+                 sm:bottom-5 bottom-4 sm:mx-auto  
+                 flex md:flex-col sm:flex-row items-center gap-4 sm:gap-5 md:gap-6 z-30"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-3 border border-white/10">
-        <ul className="flex flex-col items-center gap-4 sm:gap-5">
+        <ul className="flex md:flex-col sm:flex-row items-center gap-4 sm:gap-5">
           {socialLinks.map(({ name, icon, link, color, hoverBg, borderColor, shadowColor, rotate }, index) => (
             <motion.li
               key={name}
@@ -149,7 +151,7 @@ function SocialIcons() {
         </ul>
       </div>
       <motion.div 
-        className="flex flex-col items-center"
+        className="md:flex hidden flex-col items-center"
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: 1, height: 120 }}
         transition={{ delay: 1, duration: 0.8 }}
