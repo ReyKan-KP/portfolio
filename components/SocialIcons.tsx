@@ -1,105 +1,161 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import {
-  FiGithub,
-  FiInstagram,
-  FiLinkedin,
-  FiMail,
-  FiPhone,
-} from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
-import { SiReaddotcv } from "react-icons/si";
+import { Github, Instagram, Linkedin, Mail, Phone, FileText, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 function SocialIcons() {
   const socialLinks = [
     {
       name: "Github",
-      icon: <FiGithub />,
+      icon: <Github strokeWidth={1.5} />,
       link: "https://github.com/ReyKan-KP",
       color: "#171515",
+      hoverBg: "hover:bg-gray-900",
+      borderColor: "border-gray-700",
+      shadowColor: "shadow-gray-900/30",
+      rotate: "-3deg"
     },
     {
       name: "Resume",
-      icon: <SiReaddotcv className="rotate-10" />,
+      icon: <FileText strokeWidth={1.5} />,
       link: "/assets/KanishakaPranjal_Resume.pdf",
       color: "#e7ee9e",
+      hoverBg: "hover:bg-emerald-900",
+      borderColor: "border-emerald-500/40",
+      shadowColor: "shadow-emerald-500/30",
+      rotate: "2deg"
     },
     {
       name: "LinkedIn",
-      icon: <FiLinkedin />,
+      icon: <Linkedin strokeWidth={1.5} />,
       link: "https://www.linkedin.com/in/kanishaka-pranjal-070a45235/",
       color: "#0A66C2",
+      hoverBg: "hover:bg-blue-900",
+      borderColor: "border-blue-500/40",
+      shadowColor: "shadow-blue-500/30",
+      rotate: "-2deg"
     },
     {
       name: "Email",
-      icon: <FiMail />,
+      icon: <Mail strokeWidth={1.5} />,
       link: "mailto:kanishakpranjal@gmail.com",
       color: "#D44638",
+      hoverBg: "hover:bg-red-900",
+      borderColor: "border-red-500/40",
+      shadowColor: "shadow-red-500/30",
+      rotate: "3deg"
     },
-    // {
-    //   name: "Instagram",
-    //   icon: <FiInstagram />,
-    //   link: "https://www.instagram.com/kanishak_pranjal_/",
-    //   color: "#E1306C",
-    // },
     {
       name: "Phone",
-      icon: <FiPhone />,
+      icon: <Phone strokeWidth={1.5} />,
       link: "tel:+917488313013",
       color: "#678fcc",
+      hoverBg: "hover:bg-indigo-900",
+      borderColor: "border-indigo-500/40",
+      shadowColor: "shadow-indigo-500/30",
+      rotate: "-1deg"
     },
     {
       name: "Whatsapp",
-      icon: <FaWhatsapp />,
+      icon: <MessageCircle strokeWidth={1.5} />,
       link: "https://wa.me/7488313013",
       color: "#075E54",
+      hoverBg: "hover:bg-green-900",
+      borderColor: "border-green-500/40",
+      shadowColor: "shadow-green-500/30",
+      rotate: "2deg"
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.1,
+        delayChildren: 0.5
+      }
+    }
+  };
+
   const iconVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, x: -20, rotate: -10 },
     visible: (i: number) => ({
       opacity: 1,
-      y: 0,
+      x: 0,
+      rotate: 0,
       transition: {
-        delay: 0.15 + i * 0.2,
-        duration: 1,
-        ease: "easeInOut",
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+        delay: 0.1 * i,
       },
     }),
   };
 
   return (
     <motion.div
-      className="fixed top-1/2 left-2 sm:left-4 md:left-8 lg:left-16 transform -translate-y-1/2 flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 z-30"
+      className="fixed top-1/2 left-5 sm:left-6 md:left-8 lg:left-12 transform -translate-y-1/2 flex flex-col items-center gap-4 sm:gap-5 md:gap-6 z-30"
       initial="hidden"
       animate="visible"
+      variants={containerVariants}
     >
-      <ul className="flex flex-col items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8">
-        {socialLinks.map(({ name, icon, link, color }, index) => (
-          <motion.li
-            key={name}
-            title={name}
-            className="transition-transform duration-300 ease-in-out transform"
-            variants={iconVariants}
-            custom={index}
-            whileHover={{ scale: 1.3 }}
-          >
-            <Link href={link} target="_blank">
-              <motion.div
-                className="p-1 sm:p-2 md:p-3 lg:p-4 text-xl sm:text-2xl md:text-2xl lg:text-3xl text-lightest-slate hover:text-white-100 focus:outline-none focus:text-white-100"
-                whileHover={{ color: color }}
-                transition={{ type: "tween", duration: 0.8 }}
-              >
-                {icon}
-              </motion.div>
-            </Link>
-          </motion.li>
-        ))}
-      </ul>
-      <div className="w-px bg-light-slate flex-1 mt-2 sm:mt-4 md:mt-6 lg:mt-8"></div>
+      <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-3 border border-white/10">
+        <ul className="flex flex-col items-center gap-4 sm:gap-5">
+          {socialLinks.map(({ name, icon, link, color, hoverBg, borderColor, shadowColor, rotate }, index) => (
+            <motion.li
+              key={name}
+              title={name}
+              variants={iconVariants}
+              custom={index}
+              whileHover={{ 
+                scale: 1.15, 
+                rotate: rotate, 
+                transition: { duration: 0.2 } 
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href={link} target="_blank" className="relative block group">
+                <motion.div 
+                  className={cn(
+                    "absolute inset-0 rounded-lg",
+                    `border-2 ${borderColor}`,
+                    `shadow-[2px_2px_0px_0px] ${shadowColor}`,
+                    "group-hover:shadow-[4px_4px_0px_0px] group-hover:-translate-y-1 group-hover:-translate-x-1",
+                    "transition-all duration-300"
+                  )}
+                />
+                <motion.div
+                  className={cn(
+                    "relative p-2 rounded-lg text-white/80 group-hover:text-white",
+                    "bg-white/5 backdrop-blur-sm",
+                    hoverBg,
+                    "transition-colors duration-300 z-10"
+                  )}
+                  style={{ color: `${color}90` }}
+                  whileHover={{ color: color }}
+                >
+                  <div className="w-5 h-5 sm:w-6 sm:h-6 font-bold text-white">
+                    {icon}
+                  </div>
+                </motion.div>
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+      <motion.div 
+        className="flex flex-col items-center"
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: 120 }}
+        transition={{ delay: 1, duration: 0.8 }}
+      >
+        <div className="w-px h-full bg-gradient-to-b from-transparent via-white/30 to-white/5"></div>
+      </motion.div>
     </motion.div>
   );
 }

@@ -35,6 +35,14 @@ const config = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-20px)' },
         },
+        'float-random': {
+          '0%': { transform: 'translate(0, 0)' },
+          '20%': { transform: 'translate(10px, -10px)' },
+          '40%': { transform: 'translate(-15px, 15px)' },
+          '60%': { transform: 'translate(7px, 7px)' },
+          '80%': { transform: 'translate(-5px, -5px)' },
+          '100%': { transform: 'translate(0, 0)' },
+        },
         glow: {
           '0%, 100%': { filter: 'brightness(1)', transform: 'scale(1)' },
           '50%': { filter: 'brightness(1.5)', transform: 'scale(1.05)' },
@@ -51,6 +59,14 @@ const config = {
           '80%': { transform: 'translate(-15%, 0)' },
           '90%': { transform: 'translate(10%, 5%)' },
         },
+        'spin-reverse': {
+          from: {
+            transform: 'rotate(0deg)',
+          },
+          to: {
+            transform: 'rotate(-360deg)',
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -63,10 +79,15 @@ const config = {
         'twinkle': 'twinkle 3s ease-in-out infinite',
         'twinkle-delayed': 'twinkle 3s ease-in-out infinite 1.5s',
         'float': 'float 6s ease-in-out infinite',
+        'float-random': 'float-random 10s ease-in-out infinite',
         'glow': 'glow 4s ease-in-out infinite',
         'glow-delayed': 'glow 4s ease-in-out infinite 2s',
         'glow-slow': 'glow 6s ease-in-out infinite',
         'grain': 'grain 8s steps(10) infinite',
+        'spin-reverse': 'spin-reverse 1s linear infinite',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
     },
   },

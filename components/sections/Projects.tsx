@@ -3,13 +3,13 @@ import CheckCircleIcon from "@public/assets/icons/check-circle.svg";
 import grainImage from "@public/assets/images/grain.jpg";
 import Link from "next/link";
 import Image from "next/image";
-import { FaGithub } from "react-icons/fa";
+import { Github, Globe, ExternalLink, Code, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
 import Card from "@components/Card";
 import SectionHeader from "@components/SectionHeader";
 import { motion, Variants } from "framer-motion";
 import Tilt from "react-parallax-tilt";
-import { Globe } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const portfolioProjects = [
   {
@@ -45,6 +45,10 @@ const portfolioProjects = [
     image: "/assets/images/FableWeaver.png",
     source_code_link: "https://github.com/ReyKan-KP/FableWeaver.ai",
     live_site_link: "https://fable-weaver-ai.vercel.app/",
+    accentColor: "from-purple-500/20 to-blue-500/20",
+    shadowColor: "shadow-blue-500/30",
+    borderColor: "border-blue-500/40",
+    rotate: "-1deg"
   },
 
   {
@@ -84,6 +88,10 @@ const portfolioProjects = [
     image: "/assets/images/neximeet.png",
     source_code_link: "https://github.com/ReyKan-KP/nexi-meet",
     live_site_link: "https://nexi-meet.vercel.app",
+    accentColor: "from-emerald-500/20 to-sky-500/20",
+    shadowColor: "shadow-emerald-500/30",
+    borderColor: "border-emerald-500/40",
+    rotate: "2deg"
   },
   {
     name: "GoodWill",
@@ -117,6 +125,10 @@ const portfolioProjects = [
     image: "/assets/images/goodwill.png",
     source_code_link: "https://github.com/ReyKan-KP/GoodWill_2.0",
     live_site_link: "https://good-will-2-0.vercel.app/",
+    accentColor: "from-amber-500/20 to-rose-500/20",
+    shadowColor: "shadow-amber-500/30",
+    borderColor: "border-amber-500/40",
+    rotate: "-2deg"
   },
   {
     name: "Recommendation System",
@@ -148,6 +160,10 @@ const portfolioProjects = [
       "https://github.com/ReyKan-KP/Anime-Manga-Recommendation-System-Using-IR",
     live_site_link:
       "https://anime-manga-recommendation-system-using.onrender.com/",
+    accentColor: "from-purple-500/20 to-indigo-500/20",
+    shadowColor: "shadow-purple-500/30",
+    borderColor: "border-purple-500/40",
+    rotate: "1deg"
   },
   {
     name: "CityDex",
@@ -173,6 +189,10 @@ const portfolioProjects = [
     image: "/assets/images/CityDex.png",
     source_code_link: "https://github.com/ReyKan-KP/CityDex",
     live_site_link: "#",
+    accentColor: "from-blue-500/20 to-teal-500/20",
+    shadowColor: "shadow-blue-500/30", 
+    borderColor: "border-blue-500/40",
+    rotate: "-1.5deg"
   },
 ];
 
@@ -188,10 +208,24 @@ const cardVariants: Variants = {
     transition: {
       type: "spring",
       bounce: 0.3,
-      duration: 0.6,
-      staggerChildren: 0.1
+      duration: 0.8,
+      staggerChildren: 0.15
     }
   }
+};
+
+const tagVariants: Variants = {
+  offscreen: { opacity: 0, y: 20 },
+  onscreen: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.4 }
+  }
+};
+
+const linkVariants: Variants = {
+  initial: { scale: 1 },
+  hover: { scale: 1.1, transition: { duration: 0.2 } }
 };
 
 export const ProjectsSection = () => {
@@ -205,25 +239,49 @@ export const ProjectsSection = () => {
   };
 
   return (
-    <section className="pb-8 sm:pb-16 lg:py-24">
-      <div className="container">
+    <section className="pb-8 sm:pb-16 lg:py-24 relative">
+      {/* Background grid pattern */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]"></div>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-20 left-10 w-24 h-24 border-4 border-emerald-500/10 rotate-12"></div>
+      <div className="absolute bottom-40 right-10 w-32 h-32 border-4 border-sky-500/10 rounded-full"></div>
+      
+      <motion.div 
+        className="absolute top-60 right-20"
+        animate={{ 
+          rotate: [0, 10, -10, 0],
+          scale: [1, 1.1, 0.9, 1]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <Sparkles className="w-12 h-12 text-amber-500/20" />
+      </motion.div>
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <SectionHeader
           eyebrow="Real-world Results"
           title="Featured Projects"
           description="See how I transformed concepts into engaging projects"
         />
         <motion.div 
-          className="flex flex-col mt-6 sm:mt-10 md:mt-20 gap-10 sm:gap-20 "
+          className="flex flex-col mt-6 sm:mt-10 md:mt-20 gap-10 sm:gap-20"
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.1 }}
         >
           {portfolioProjects.map((project, projectIndex) => (
-            <div
+            <motion.div
               key={project.name}
               className="px-4 pt-4 sm:px-8 sm:pt-8 md:pt-12 md:px-15 lg:pt-16 lg:px-20 sticky"
               style={{ top: `calc(64px + ${projectIndex * 40}px)` }}
+              variants={cardVariants}
             >
+              {/* Mobile View */}
               <motion.div 
                 className="block md:hidden"
                 variants={cardVariants}
@@ -231,182 +289,226 @@ export const ProjectsSection = () => {
                 whileInView="onscreen"
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <Card>
+                <div className={cn(
+                  "relative overflow-hidden rounded-xl",
+                  "transition-all duration-500",
+                  `bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900`,
+                  `border-2 ${project.borderColor}`,
+                  `shadow-[6px_6px_0px_0px] ${project.shadowColor}`,
+                  `rotate-[${project.rotate}]`,
+                  "group hover:shadow-[8px_8px_0px_0px] hover:-translate-y-1 hover:-translate-x-1"
+                )}>
                   <div
                     className="absolute inset-0 -z-30 opacity-5"
                     style={{ backgroundImage: `url(${grainImage.src})` }}
                   ></div>
 
-                  <div>
+                  <div className="p-5">
                     <div className="flex flex-col gap-3 mb-3 sm:mb-4">
-                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-wider sm:tracking-widest gap-2 text-transparent bg-clip-text break-words">
+                      <h3 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold uppercase tracking-wider sm:tracking-widest gap-2 text-white break-words">
                         {project.name}
                       </h3>
-                      <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
-                        <Link
+                      <div className="flex flex-col gap-2 sm:flex-row sm:gap-4 mt-3">
+                        <motion.a
                           href={project.live_site_link}
-                          passHref
-                          legacyBehavior
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative flex items-center justify-center gap-2 text-sm sm:text-base text-white bg-white/10 backdrop-blur-sm border border-white/20 py-2 px-3 rounded-md group overflow-hidden"
+                          variants={linkVariants}
+                          whileHover="hover"
                         >
-                          <a target="_blank" rel="noopener noreferrer" className="w-fit">
-                            <span className="flex items-center text-xs sm:text-sm text-white/70 hover:text-white">
-                              <Globe className="mr-1 sm:mr-2 w-4 h-4" />
-                              Live-Site
-                            </span>
-                          </a>
-                        </Link>
-                        <Link
+                          <Globe className="w-4 h-4" />
+                          <span>Live Demo</span>
+                          <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        </motion.a>
+                        <motion.a
                           href={project.source_code_link}
-                          passHref
-                          legacyBehavior
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative flex items-center justify-center gap-2 text-sm sm:text-base text-white bg-white/10 backdrop-blur-sm border border-white/20 py-2 px-3 rounded-md group overflow-hidden"
+                          variants={linkVariants}
+                          whileHover="hover"
                         >
-                          <a target="_blank" rel="noopener noreferrer" className="w-fit">
-                            <span className="flex items-center text-xs sm:text-sm text-white/70 hover:text-white">
-                              <FaGithub className="mr-1 sm:mr-2 w-4 h-4" />
-                              GitHub
-                            </span>
-                          </a>
-                        </Link>
+                          <Github className="w-4 h-4" />
+                          <span>Source Code</span>
+                          <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        </motion.a>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-2">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className={`text-xs sm:text-sm font-medium ${tag.color}`}
-                        >
-                          #{tag.name}
-                        </span>
-                      ))}
-                    </div>
-                    <hr className="border-t-2 border-white/5 mt-3 sm:mt-4 md:mt-5" />
-                    <div className="lg:flex lg:items-center lg:gap-10">
-                      <div className="relative">
-                        <ul className={`flex flex-col gap-3 sm:gap-5 mt-3 sm:mt-4 md:mt-5 lg:flex-1 ${!expandedDescriptions[project.name] ? 'max-h-[120px] sm:max-h-[150px] overflow-hidden' : ''}`}>
-                          {project.description.map((desc, index) => (
-                            <li
-                              key={index}
-                              className="flex gap-2 text-xs sm:text-sm md:text-base text-white/50"
-                            >
-                              <CheckCircleIcon className="size-4 sm:size-5 md:size-6 flex-shrink-0" />
-                              <span>{desc}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        {project.description.length > 2 && (
-                          <button
-                            onClick={() => toggleDescription(project.name)}
-                            className="mt-2 text-xs sm:text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
-                          >
-                            {expandedDescriptions[project.name] ? 'Show Less' : 'Show More'}
-                          </button>
-                        )}
-                      </div>
-                      <div className="mt-6 sm:mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                        <div className="relative h-48 sm:h-60 md:h-80 lg:h-96">
-                          <Image
-                            src={project.image}
-                            alt={project.name}
-                            className="rounded-2xl sm:rounded-3xl object-contain w-full h-full"
-                            style={{ objectFit: "contain" }}
-                            fill
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
 
-              <motion.div
-                className="hidden md:block"
-                variants={cardVariants}
-                initial="offscreen"
-                whileInView="onscreen"
-                viewport={{ once: true, amount: 0.3 }}
-              >
-                <Tilt
-                  tiltMaxAngleX={5}
-                  tiltMaxAngleY={5}
-                  perspective={1000}
-                  scale={1.01}
-                  transitionSpeed={400}
-                  className="will-change-transform"
-                >
-                  <Card>
-                    <div
-                      className="absolute inset-0 -z-30 opacity-5"
-                      style={{ backgroundImage: `url(${grainImage.src})` }}
-                    ></div>
+                    <div className="relative overflow-hidden h-44 sm:h-52 mb-5 rounded-lg border-2 border-white/20">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50"></div>
+                    </div>
 
                     <div>
-                      <div className="flex justify-between items-center mb-4">
-                        <h3 className="font-serif text-2xl mt-2 md:mt-5 md:text-4xl bg-gradient-to-r from-emerald-300 to-sky-400 inline-flex font-bold uppercase tracking-widest gap-2 text-transparent bg-clip-text">
-                          {project.name}
-                        </h3>
-                        <div className="flex gap-4">
-                          <Link
+                      <div className="space-y-2">
+                        {(expandedDescriptions[project.name] ? project.description : project.description.slice(0, 2)).map((desc, index) => (
+                          <div key={index} className="flex items-start gap-2">
+                            <CheckCircleIcon className="flex-shrink-0 w-5 h-5 text-emerald-400 mt-0.5" />
+                            <p className="text-sm sm:text-base text-gray-300">{desc}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {project.description.length > 2 && (
+                        <button
+                          onClick={() => toggleDescription(project.name)}
+                          className="mt-3 text-sm flex items-center gap-1 text-gray-400 hover:text-white transition-colors"
+                        >
+                          {expandedDescriptions[project.name] ? (
+                            <>Show Less <ChevronUp className="w-4 h-4" /></>
+                          ) : (
+                            <>Show More <ChevronDown className="w-4 h-4" /></>
+                          )}
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <motion.span
+                          key={tag.name}
+                          className={cn(
+                            "text-xs font-medium px-2 py-1 rounded-md",
+                            "bg-white/10 backdrop-blur-sm",
+                            "border border-white/10",
+                            tag.color
+                          )}
+                          variants={tagVariants}
+                        >
+                          {tag.name}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Desktop View */}
+              <div className="hidden md:flex">
+                <motion.div className="w-full md:w-2/5 md:flex-shrink-0 relative" variants={cardVariants}>
+                  <Tilt
+                    tiltMaxAngleX={5}
+                    tiltMaxAngleY={5}
+                    glareEnable={true}
+                    glareMaxOpacity={0.1}
+                    glareColor="#ffffff"
+                    glarePosition="all"
+                    glareBorderRadius="12px"
+                    className="h-full"
+                  >
+                    <div className={cn(
+                      "relative overflow-hidden rounded-xl w-full h-full",
+                      "transition-all duration-500",
+                      `border-2 ${project.borderColor}`,
+                      `shadow-[6px_6px_0px_0px] ${project.shadowColor}`,
+                      `rotate-[${project.rotate}]`,
+                      "hover:shadow-[8px_8px_0px_0px] hover:-translate-y-1 hover:-translate-x-1"
+                    )}>
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-90"></div>
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        
+                        className="aspect-[16/9]   opacity-60 hover:opacity-80 transition-opacity duration-500"
+                      />
+
+                      <div className="absolute top-4 left-4 flex space-x-2">
+                        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      </div>
+                      
+                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                        <div className="flex gap-3">
+                          <motion.a
                             href={project.live_site_link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className={cn(
+                              "relative flex items-center justify-center gap-2",
+                              "text-sm text-white bg-white/10 backdrop-blur-sm",
+                              "border border-white/20 py-2 px-3 rounded-md",
+                              "transition-all duration-300 group overflow-hidden"
+                            )}
+                            variants={linkVariants}
+                            whileHover="hover"
                           >
-                            <span className="flex items-center text-sm text-white/70 hover:text-white">
-                              <Globe className="mr-2" />
-                              Live-Site
-                            </span>
-                          </Link>
-                          <Link
+                            <ExternalLink className="w-4 h-4" />
+                            <span>Live Demo</span>
+                            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                          </motion.a>
+                          <motion.a
                             href={project.source_code_link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className={cn(
+                              "relative flex items-center justify-center gap-2",
+                              "text-sm text-white bg-white/10 backdrop-blur-sm",
+                              "border border-white/20 py-2 px-3 rounded-md",
+                              "transition-all duration-300 group overflow-hidden"
+                            )}
+                            variants={linkVariants}
+                            whileHover="hover"
                           >
-                            <span className="flex items-center text-sm text-white/70 hover:text-white">
-                              <FaGithub className="mr-2" />
-                              GitHub
-                            </span>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        {project.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className={`text-sm font-medium ${tag.color}`}
-                          >
-                            #{tag.name}
-                          </span>
-                        ))}
-                      </div>
-                      <hr className="border-t-2 border-white/5 mt-4 md:mt-5" />
-                      <div className="lg:flex lg:items-center lg:gap-10">
-                        <ul className="flex flex-col gap-5 mt-4 md:mt-5 lg:flex-1">
-                          {project.description.map((desc, index) => (
-                            <li
-                              key={index}
-                              className="flex gap-2 text-sm md:text-base text-white/50"
-                            >
-                              <CheckCircleIcon className="size-5 md:size-6" />
-                              <span>{desc}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-8 lg:mt-0 lg:mb-1 lg:flex-1 -mb-4 md:-mb-0 lg:h-full lg:w-auto lg:max-w-none">
-                          <div className="relative h-60 sm:h-72 md:h-80 lg:h-96">
-                            <Image
-                              src={project.image}
-                              alt={project.name}
-                              className="rounded-3xl object-cover w-full h-full"
-                              style={{ objectFit: "cover" }}
-                              fill
-                            />
-                          </div>
+                            <Code className="w-4 h-4" />
+                            <span>Code</span>
+                            <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                          </motion.a>
                         </div>
                       </div>
                     </div>
-                  </Card>
-                </Tilt>
-              </motion.div>
-            </div>
+                  </Tilt>
+                </motion.div>
+
+                <motion.div className="md:w-3/5 ml-0 md:ml-6" variants={cardVariants}>
+                  <div className={cn(
+                    "h-full p-6 sm:p-8 relative overflow-hidden rounded-xl",
+                    "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900",
+                    `border-2 ${project.borderColor}`,
+                    `shadow-[4px_4px_0px_0px] ${project.shadowColor}`,
+                    "backdrop-blur-sm"
+                  )}>
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text break-words">
+                      {project.name}
+                    </h3>
+
+                    <div className="space-y-3 mb-6">
+                      {project.description.map((desc, index) => (
+                        <div key={index} className="flex items-start gap-2">
+                          <CheckCircleIcon className="flex-shrink-0 w-5 h-5 text-emerald-400 mt-0.5" />
+                          <p className="text-sm sm:text-base text-gray-300">{desc}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mt-auto">
+                      {project.tags.map((tag) => (
+                        <motion.span
+                          key={tag.name}
+                          className={cn(
+                            "text-xs font-medium px-2 py-1 rounded-md",
+                            "bg-white/10 backdrop-blur-sm",
+                            "border border-white/10",
+                            tag.color
+                          )}
+                          variants={tagVariants}
+                        >
+                          {tag.name}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

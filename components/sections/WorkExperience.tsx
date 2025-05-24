@@ -133,184 +133,294 @@ const WorkExperienceSection: React.FC = () => {
   };
 
   return (
-    <section className="relative py-6 sm:py-12 lg:py-20 overflow-hidden">
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background Elements */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
-        </div>
-      </div> */}
-      <div className="absolute inset-0 -z-10 opacity-10 mix-blend-overlay"
-                 style={{ backgroundImage: `url(${grainImage.src})` }} />
+      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />
+      
+      {/* Decorative elements */}
+      <div className="absolute top-20 left-20 w-32 h-32 border-4 border-emerald-500/20 rotate-12 hidden lg:block"></div>
+      <div className="absolute bottom-40 right-10 w-40 h-40 border-4 border-blue-500/20 rounded-full hidden lg:block"></div>
+      
+      <motion.div 
+        className="absolute top-60 right-20"
+        animate={{ 
+          rotate: [0, 10, -10, 0],
+          scale: [1, 1.1, 0.9, 1]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <FaBriefcase className="w-14 h-14 text-emerald-500/20" />
+      </motion.div>
 
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 relative max-w-[95%] sm:max-w-5xl">
-        <SectionHeader
-          eyebrow="Professional Journey"
-          title="Work Experience"
-          description="Dive into my internship experience and the skills I've developed along the way."
-        />
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <SectionHeader
+            eyebrow="Professional Journey"
+            title="Work Experience"
+            description="Dive into my internship experience and the skills I've developed along the way."
+          />
+        </motion.div>
         
-        <div className="mt-4 sm:mt-8">
-          <Card className="backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-500">
-            <div className="p-3 sm:p-4 md:p-6 lg:p-8">
-              {/* Company Header */}
-              <div className="flex flex-col md:flex-row items-center mb-4 sm:mb-6 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-sky-500/10 blur-2xl"></div>
-                <motion.div 
-                  className="bg-gradient-to-r from-emerald-400 to-sky-500 p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl mb-3 md:mb-0 md:mr-6"
-                  whileHover={{ rotate: 12, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <FaBriefcase className="text-gray-900 text-xl sm:text-2xl md:text-4xl" />
-                </motion.div>
-                <div className="text-center md:text-left z-10">
-                  <motion.h3 
-                    className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-2"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+        <motion.div 
+          className="mt-6 sm:mt-10"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        >
+          <div className="relative">
+            {/* Neo-brutalist card with offset shadow */}
+            <div className="absolute inset-0 bg-white/5 backdrop-blur-xl border-2 border-white/20 rounded-xl translate-x-2 translate-y-2"></div>
+            
+            <Card className="backdrop-blur-xl bg-white/5 border-2 border-white/10 shadow-lg relative rotate-[-0.5deg] hover:rotate-0 transition-all duration-500">
+              <div className="p-4 sm:p-6 md:p-8 lg:p-10">
+                {/* Company Header */}
+                <div className="flex flex-col md:flex-row items-center mb-6 sm:mb-8 relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-sky-500/10 blur-2xl"></div>
+                  <motion.div 
+                    className="bg-gradient-to-r from-emerald-400 to-sky-500 p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl mb-4 md:mb-0 md:mr-6 border-2 border-white/30 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]"
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    {workExperience.title}
-                  </motion.h3>
-                  <div className="space-y-1 sm:space-y-2">
-                    <p className="text-sm sm:text-base md:text-xl text-gray-300 font-medium">
-                      {workExperience.company}
-                    </p>
-                    <p className="inline-block px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-emerald-500/20 to-sky-500/20 border border-white/10 text-xs sm:text-sm">
-                      {workExperience.duration}
-                    </p>
+                    <FaBriefcase className="text-gray-900 text-2xl sm:text-3xl md:text-4xl" />
+                  </motion.div>
+                  <div className="text-center md:text-left z-10 md:ml-2">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="relative inline-block"
+                    >
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 relative">
+                        {workExperience.title}
+                        <div className="absolute -bottom-1.5 left-0 right-0 h-3 bg-gradient-to-r from-emerald-500/60 to-sky-500/60 -z-10 skew-x-3 rounded"></div>
+                      </h3>
+                    </motion.div>
+                    <div className="space-y-2">
+                      <p className="text-lg sm:text-xl text-gray-300 font-medium">
+                        {workExperience.company}
+                      </p>
+                      <p className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-emerald-500/20 to-sky-500/20 border-2 border-white/10 shadow-[2px_2px_0px_0px_rgba(255,255,255,0.1)] text-sm font-medium">
+                        {workExperience.duration}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Navigation Tabs */}
-              <div className="flex justify-center mb-4 sm:mb-6">
-                <div className="grid grid-cols-3 gap-1 sm:gap-2 w-full max-w-2xl backdrop-blur-sm bg-white/5 p-1.5 sm:p-2 rounded-lg">
-                  {[
-                    {
-                      key: "overview",
-                      icon: FaCode,
-                      label: "Overview",
-                      bgColor: "bg-gradient-to-r from-emerald-400 to-sky-500",
-                    },
-                    {
-                      key: "responsibilities",
-                      icon: FaLaptopCode,
-                      label: "Tasks",
-                      bgColor: "bg-gradient-to-r from-blue-400 via-teal-500 to-sky-600",
-                    },
-                    {
-                      key: "skills",
-                      icon: FaDatabase,
-                      label: "Skills",
-                      bgColor: "bg-gradient-to-r from-sky-400 via-blue-500 to-teal-500",
-                    },
-                  ].map((tab) => (
-                    <motion.div
-                      key={tab.key}
-                      variants={tabVariants}
-                      animate={activeTab === tab.key ? "active" : "inactive"}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Button
-                        variant={activeTab === tab.key ? "default" : "outline"}
-                        className={`w-full h-8 sm:h-9 md:h-11 ${
-                          activeTab === tab.key 
-                            ? `${tab.bgColor} shadow-lg` 
-                            : "hover:bg-white/10 border-white/10"
-                        } transition-all duration-300 text-[10px] sm:text-xs md:text-sm font-medium`}
-                        onClick={() => setActiveTab(tab.key as typeof activeTab)}
+                {/* Navigation Tabs */}
+                <div className="flex justify-center mb-6 sm:mb-8">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full max-w-2xl backdrop-blur-sm bg-black/20 p-2.5 sm:p-3 rounded-lg border-2 border-white/10 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.2)]">
+                    {[
+                      {
+                        key: "overview",
+                        icon: FaCode,
+                        label: "Overview",
+                        bgColor: "bg-gradient-to-r from-emerald-400 to-sky-500",
+                        rotate: "-1deg",
+                      },
+                      {
+                        key: "responsibilities",
+                        icon: FaLaptopCode,
+                        label: "Tasks",
+                        bgColor: "bg-gradient-to-r from-blue-400 via-teal-500 to-sky-600",
+                        rotate: "1deg",
+                      },
+                      {
+                        key: "skills",
+                        icon: FaDatabase,
+                        label: "Skills",
+                        bgColor: "bg-gradient-to-r from-sky-400 via-blue-500 to-teal-500",
+                        rotate: "-1.5deg",
+                      },
+                    ].map((tab) => (
+                      <motion.div
+                        key={tab.key}
+                        variants={tabVariants}
+                        animate={activeTab === tab.key ? "active" : "inactive"}
+                        whileHover={{ scale: 1.05, rotate: activeTab === tab.key ? tab.rotate : 0 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <tab.icon className={`mr-1 sm:mr-2 text-sm sm:text-base md:text-lg ${activeTab === tab.key ? 'animate-bounce' : ''}`} />
-                        {/* <span className="hidden xs:inline">{tab.label}</span> */}
-                        <span className="">{tab.label}</span>
-                      </Button>
-                    </motion.div>
-                  ))}
+                        <Button
+                          variant={activeTab === tab.key ? "default" : "outline"}
+                          className={`w-full h-10 sm:h-12 md:h-14 relative rounded-md ${
+                            activeTab === tab.key 
+                              ? `${tab.bgColor} shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] border-2 border-white/30 font-bold transform rotate-[${tab.rotate}]` 
+                              : "hover:bg-white/10 border-2 border-white/10"
+                          } transition-all duration-300 text-xs sm:text-sm md:text-base font-medium`}
+                          onClick={() => setActiveTab(tab.key as typeof activeTab)}
+                        >
+                          <tab.icon className={`mr-2 text-base sm:text-lg md:text-xl ${activeTab === tab.key ? 'animate-bounce' : ''}`} />
+                          <span>{tab.label}</span>
+                        </Button>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Content Area */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTab}
-                  variants={contentVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="min-h-[250px] sm:min-h-[300px] p-3 sm:p-4 md:p-6 backdrop-blur-xl bg-white/5 rounded-lg border border-white/10"
-                >
-                  {activeTab === "overview" && (
-                    <motion.p 
-                      className="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {workExperience.description}
-                    </motion.p>
-                  )}
-                  
-                  {activeTab === "responsibilities" && (
-                    <motion.ul 
-                      className="space-y-2 sm:space-y-3"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {workExperience.responsibilities.map((responsibility, index) => (
-                        <motion.li
-                          key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 * index }}
-                          className="flex items-start gap-2 sm:gap-3"
-                        >
-                          <div className="mt-1 flex-shrink-0">
-                            <div className="size-1.5 sm:size-2 rounded-full bg-gradient-to-r from-emerald-400 to-sky-500" />
+                {/* Content Area */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    variants={contentVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    className="min-h-[300px] sm:min-h-[350px] p-5 sm:p-6 md:p-8 backdrop-blur-xl bg-white/5 rounded-lg border-2 border-white/10 shadow-[5px_5px_0px_0px_rgba(0,0,0,0.2)]"
+                  >
+                    {activeTab === "overview" && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-r from-emerald-500/30 to-sky-500/30 rounded-full flex items-center justify-center border-2 border-white/10">
+                            <FaCode className="text-white text-xl" />
                           </div>
-                          <p className="text-xs sm:text-sm md:text-base text-gray-300">
-                            {truncateText(responsibility, 100)}
-                          </p>
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                  )}
+                          <button 
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="text-white/70 hover:text-white p-2 rounded-full hover:bg-white/5 transition-colors"
+                          >
+                            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+                          </button>
+                        </div>
+                        <motion.p 
+                          className="text-gray-300 text-base sm:text-lg leading-relaxed"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          {truncateText(workExperience.description, 250)}
+                        </motion.p>
+                        
+                        {workExperience.description.length > 250 && !isExpanded && (
+                          <motion.button
+                            className="mt-4 px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-sky-500/20 rounded-md text-white hover:bg-white/10 border border-white/10 text-sm font-medium transition-all hover:-translate-y-1"
+                            onClick={() => setIsExpanded(true)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            Read More
+                          </motion.button>
+                        )}
+                      </motion.div>
+                    )}
+                    
+                    {activeTab === "responsibilities" && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-r from-blue-500/30 to-teal-500/30 rounded-full flex items-center justify-center border-2 border-white/10">
+                            <FaLaptopCode className="text-white text-xl" />
+                          </div>
+                          <button 
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="text-white/70 hover:text-white p-2 rounded-full hover:bg-white/5 transition-colors"
+                          >
+                            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+                          </button>
+                        </div>
+                        <motion.ul 
+                          className="space-y-4"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          {workExperience.responsibilities.map((responsibility, index) => (
+                            <motion.li
+                              key={index}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.1 * index }}
+                              className="flex gap-3 group"
+                            >
+                              <div className="mt-1.5 flex-shrink-0">
+                                <div className="size-3 rounded-full bg-gradient-to-r from-blue-400 to-teal-500 group-hover:scale-150 transition-all duration-300" />
+                              </div>
+                              <div>
+                                <p className="text-sm sm:text-base text-gray-300">
+                                  {truncateText(responsibility, 120)}
+                                </p>
+                                <div className="w-0 group-hover:w-full h-0.5 bg-gradient-to-r from-blue-500/40 to-teal-500/40 mt-1 transition-all duration-500"></div>
+                              </div>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                      </motion.div>
+                    )}
 
-                  {activeTab === "skills" && (
-                    <motion.div 
-                      className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {workExperience.skills.map((skill, index) => (
-                        <motion.div
-                          key={skill.name}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.1 * index }}
-                          className="flex flex-col items-center p-2 sm:p-3 md:p-4 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-                        >
-                          <skill.icon className={`text-xl sm:text-2xl md:text-3xl ${skill.color} mb-1 sm:mb-2`} />
-                          <p className="text-[10px] sm:text-xs md:text-sm text-gray-300 text-center mb-1">
-                            {skill.name}
-                          </p>
-                          <div className="scale-50 sm:scale-75 md:scale-100">
-                            <StarRating rating={skill.level} color={skill.color} />
+                    {activeTab === "skills" && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <div className="flex justify-between items-start mb-6">
+                          <div className="w-12 h-12 bg-gradient-to-r from-sky-500/30 to-blue-500/30 rounded-full flex items-center justify-center border-2 border-white/10">
+                            <FaDatabase className="text-white text-xl" />
                           </div>
+                        </div>
+                        <motion.div 
+                          className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          {workExperience.skills.map((skill, index) => (
+                            <motion.div
+                              key={skill.name}
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1 * index }}
+                              whileHover={{ 
+                                scale: 1.05, 
+                                rotate: index % 2 === 0 ? 2 : -2,
+                                transition: { type: "spring", stiffness: 400, damping: 10 }
+                              }}
+                              className="flex flex-col items-center p-4 rounded-lg bg-gradient-to-br from-white/5 to-white/10 border-2 border-white/10 shadow-[3px_3px_0px_0px_rgba(0,0,0,0.2)] hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,0.2)] transition-all"
+                            >
+                              <motion.div
+                                animate={{ 
+                                  y: [0, -5, 0],
+                                  transition: { 
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    repeatType: "reverse",
+                                    delay: index * 0.1
+                                  }
+                                }}
+                              >
+                                <skill.icon className={`text-3xl sm:text-4xl ${skill.color} mb-3`} />
+                              </motion.div>
+                              <p className="text-sm sm:text-base text-white font-medium text-center mb-2">
+                                {skill.name}
+                              </p>
+                              <div className="mt-1">
+                                <StarRating rating={skill.level} color={skill.color} />
+                              </div>
+                            </motion.div>
+                          ))}
                         </motion.div>
-                      ))}
-                    </motion.div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </Card>
-        </div>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </Card>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
