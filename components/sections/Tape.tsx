@@ -98,7 +98,7 @@ export const TapeSection = () => {
   ];
 
   return (
-    <div ref={containerRef} className="py-24 sm:py-32 lg:py-40 w-full ">
+    <div ref={containerRef} className="py-24 sm:py-32 lg:py-40 w-full mx-auto overflow-x-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />
       
