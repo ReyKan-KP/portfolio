@@ -108,7 +108,7 @@ export const Header = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 100 }}
-        className="fixed top-0 sm:top-2 md:top-5 lg:top-10 left-0 sm:left-2 md:left-5 lg:left-10 right-0 sm:right-2 md:right-5 lg:right-10 z-50 px-4 sm:px-6 py-2 rounded-full bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg shadow-lg border border-white/20 max-w-6xl mx-auto"
+        className="fixed top-0 sm:top-2 md:top-5 lg:top-10 left-0 sm:left-2 md:left-5 lg:left-10 right-0 sm:right-2 md:right-5 lg:right-10 z-50 px-4 sm:px-6 py-2 rounded-full bg-white/10 dark:bg-gray-900/10 backdrop-blur-lg shadow-lg border border-white/20 max-w-6xl mx-auto overflow-x-hidden "
       >
         <div className="container flex items-center justify-between h-12 sm:h-14">
           {/* Logo */}

@@ -98,7 +98,7 @@ export const TapeSection = () => {
   ];
 
   return (
-    <div ref={containerRef} className="relative py-24 sm:py-32 lg:py-40 max-w-7xl overflow-hidden ">
+    <div ref={containerRef} className="py-24 sm:py-32 lg:py-40 w-full ">
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />
       
@@ -114,7 +114,7 @@ export const TapeSection = () => {
         <StarIcon className="w-12 h-12 text-amber-500/20" />
       </motion.div>
       
-      <div className="relative w-screen -mx-[calc(50vw-50%)]">
+      <div className="relative w-screen -mx-[calc(50vw-50%)] ">
         {/* Tapes */}
         {tapeStyles.map((style, index) => (
           <motion.div 
@@ -144,8 +144,6 @@ export const TapeSection = () => {
               )}
               style={{ 
                 transform: `rotate(${style.rotate})`,
-                width: "150%",
-                marginLeft: "-25%",
               }}
               whileHover={{ 
                 scale: 1.02, 
@@ -154,7 +152,7 @@ export const TapeSection = () => {
             >
               <div className={cn(
                 "flex overflow-hidden",
-                "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
+                "[mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
               )}>
                 <div 
                   className={cn(

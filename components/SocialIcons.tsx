@@ -99,7 +99,7 @@ function SocialIcons() {
 
   return (
     <motion.div
-      className="fixed md:top-1/2 md:left-5 sm:left-6 md:left-8 lg:left-12 md:-translate-y-1/2 
+      className="fixed md:top-1/2 md:left-5 md:left-8 lg:left-12 md:-translate-y-1/2 
                  sm:bottom-5 bottom-4 sm:mx-auto  
                  flex md:flex-col sm:flex-row items-center gap-4 sm:gap-5 md:gap-6 z-30"
       initial="hidden"

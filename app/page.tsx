@@ -106,7 +106,7 @@ export default function Home() {
 
         {/* Decorative neo-brutalist elements */}
         <div className="fixed inset-0 -z-5 overflow-hidden">
-          {/* Abstract shapes that follow scroll */}
+          
           <m.div 
             className="absolute w-32 h-32 md:w-64 md:h-64 rounded-full bg-emerald-500/10 blur-3xl"
             animate={{
@@ -154,7 +154,7 @@ export default function Home() {
         </div>
 
         {/* Grid pattern overlay */}
-        <div className="fixed inset-0 bg-[url('/grid.svg')] opacity-[0.02] -z-5"></div>
+        {/* <div className="fixed inset-0 bg-[url('/grid.svg')] opacity-[0.02] -z-5"></div> */}
         
         <div className="z-50">
           <Header />

@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import grainImage from "@public/assets/images/grain.jpg";
 import StarIcon from "@public/assets/icons/star.svg";
 import SparkleIcon from "@public/assets/icons/sparkle.svg";
 import Image from "next/image";
 import { HeroOrbit } from "@components/HeroOrbit";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { useMediaQuery } from "@hooks/useMediaQuery";
 
 const OrbitAnimations = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isSmall = useMediaQuery("(max-width: 640px)");
   
   // Mouse parallax effect
   const mouseX = useMotionValue(0);
@@ -45,10 +49,18 @@ const OrbitAnimations = () => {
     "text-blue-300", 
     "text-purple-300"
   ];
+
+  // Responsive orbit sizes
+  const getOrbitSize = (baseSize: number) => {
+    if (isSmall) return baseSize * 0.45;
+    if (isMobile) return baseSize * 0.7;
+    return baseSize;
+  };
   
   return (
     <>
       <motion.div 
+        ref={containerRef}
         className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_70%,transparent)] overflow-hidden"
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovering(true)}
@@ -66,59 +78,82 @@ const OrbitAnimations = () => {
           }}
         />
         
-        {/* Neo-brutalist decorative elements */}
-        <motion.div 
-          className="absolute top-40 left-[5%] w-16 h-16 border-4 border-yellow-300 rounded-md rotate-12 opacity-60"
-          style={{ x: fastTransformX, y: fastTransformY }}
-          whileHover={{ scale: 1.2, rotate: 0, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        />
-        
-        <motion.div 
-          className="absolute top-[20%] right-[15%] w-24 h-12 bg-pink-300/20 border-2 border-pink-500 -rotate-6 opacity-50"
-          style={{ x: mediumTransformX, y: mediumTransformY }}
-          whileHover={{ scale: 1.1, rotate: 0, opacity: 0.8 }}
-          transition={{ type: "spring", stiffness: 200 }}
-        />
-        
-        <motion.div 
-          className="absolute bottom-[30%] left-[20%] w-20 h-20 bg-blue-300/10 border-4 border-blue-400 rotate-12 opacity-40"
-          style={{ x: slowTransformX, y: slowTransformY }}
-          whileHover={{ scale: 1.2, rotate: 0, opacity: 0.7 }}
-          transition={{ type: "spring", stiffness: 150 }}
-        />
+        {/* Neo-brutalist decorative elements - hidden on small screens */}
+        {!isSmall && (
+          <>
+            <motion.div 
+              className="absolute top-40 left-[5%] w-16 h-16 border-4 border-yellow-300 rounded-md rotate-12 opacity-60 md:block hidden"
+              style={{ x: fastTransformX, y: fastTransformY }}
+              whileHover={{ scale: 1.2, rotate: 0, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            
+            <motion.div 
+              className="absolute top-[20%] right-[15%] w-24 h-12 bg-pink-300/20 border-2 border-pink-500 -rotate-6 opacity-50 md:block hidden"
+              style={{ x: mediumTransformX, y: mediumTransformY }}
+              whileHover={{ scale: 1.1, rotate: 0, opacity: 0.8 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            />
+            
+            <motion.div 
+              className="absolute bottom-[30%] left-[20%] w-20 h-20 bg-blue-300/10 border-4 border-blue-400 rotate-12 opacity-40 md:block hidden"
+              style={{ x: slowTransformX, y: slowTransformY }}
+              whileHover={{ scale: 1.2, rotate: 0, opacity: 0.7 }}
+              transition={{ type: "spring", stiffness: 150 }}
+            />
+          </>
+        )}
         
         {/* Orbit rings with neo-brutalist design */}
         <motion.div 
-          className="size-[620px] hero-ring"
+          className="hero-ring"
+          style={{ 
+            width: getOrbitSize(620),
+            height: getOrbitSize(620),
+            x: slowTransformX, 
+            y: slowTransformY 
+          }}
           animate={{ opacity: [0.4, 0.7, 0.4], borderWidth: ["1px", "3px", "1px"] }} 
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ x: slowTransformX, y: slowTransformY }}
         />
         
         <motion.div 
-          className="size-[820px] hero-ring"
+          className="hero-ring"
+          style={{ 
+            width: getOrbitSize(820),
+            height: getOrbitSize(820),
+            x: mediumTransformX, 
+            y: mediumTransformY 
+          }}
           animate={{ opacity: [0.3, 0.5, 0.3], borderWidth: ["2px", "4px", "2px"] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          style={{ x: mediumTransformX, y: mediumTransformY }}
         />
         
         <motion.div 
-          className="size-[1020px] hero-ring"
+          className="hero-ring"
+          style={{ 
+            width: getOrbitSize(1020),
+            height: getOrbitSize(1020),
+            x: fastTransformX, 
+            y: fastTransformY 
+          }}
           animate={{ opacity: [0.2, 0.4, 0.2], borderWidth: ["1px", "3px", "1px"] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          style={{ x: fastTransformX, y: fastTransformY }}
         />
         
         <motion.div 
-          className="size-[1220px] hero-ring"
+          className="hero-ring"
+          style={{ 
+            width: getOrbitSize(1220),
+            height: getOrbitSize(1220)
+          }}
           animate={{ opacity: [0.1, 0.3, 0.1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         />
         
-        {/* Interactive orbiting elements */}
+        {/* Interactive orbiting elements - conditionally render based on screen size */}
         <HeroOrbit
-          size={430}
+          size={getOrbitSize(430)}
           rotation={-14}
           shouldOrbit
           orbitDuration={isHovering ? 15 : 25}
@@ -126,12 +161,12 @@ const OrbitAnimations = () => {
           spinDuration={4}
         >
           <motion.div whileHover={{ scale: 1.5 }} className="cursor-pointer">
-            <SparkleIcon className="size-8 text-emerald-300/30 animate-twinkle" />
+            <SparkleIcon className="size-8 sm:size-6 text-emerald-300/30 animate-twinkle" />
           </motion.div>
         </HeroOrbit>
         
         <HeroOrbit
-          size={440}
+          size={getOrbitSize(440)}
           rotation={79}
           shouldOrbit
           orbitDuration={isHovering ? 18 : 28}
@@ -139,24 +174,24 @@ const OrbitAnimations = () => {
           spinDuration={3}
         >
           <motion.div whileHover={{ scale: 1.4 }} className="cursor-pointer">
-            <SparkleIcon className="size-5 text-pink-300/40 animate-twinkle-delayed" />
+            <SparkleIcon className="size-5 sm:size-4 text-pink-300/40 animate-twinkle-delayed" />
           </motion.div>
         </HeroOrbit>
         
         <HeroOrbit 
-          size={520} 
+          size={getOrbitSize(520)} 
           rotation={-41} 
           shouldOrbit 
           orbitDuration={isHovering ? 22 : 32}
         >
           <motion.div 
             whileHover={{ scale: 2 }} 
-            className="size-3 rounded-full bg-emerald-300/30 animate-pulse cursor-pointer"
+            className="size-3 sm:size-2 rounded-full bg-emerald-300/30 animate-pulse cursor-pointer"
           />
         </HeroOrbit>
         
         <HeroOrbit
-          size={530}
+          size={getOrbitSize(530)}
           rotation={178}
           shouldOrbit
           orbitDuration={isHovering ? 26 : 36}
@@ -164,28 +199,30 @@ const OrbitAnimations = () => {
           spinDuration={5}
         >
           <motion.div whileHover={{ scale: 1.5, rotate: 180 }} className="cursor-pointer">
-            <SparkleIcon className="size-10 text-yellow-300/40 animate-float" />
+            <SparkleIcon className="size-10 sm:size-6 text-yellow-300/40 animate-float" />
           </motion.div>
         </HeroOrbit>
         
-        <HeroOrbit
-          size={550}
-          rotation={20}
-          shouldOrbit
-          orbitDuration={isHovering ? 28 : 38}
-          shouldSpin
-          spinDuration={6}
-        >
-          <motion.div 
-            whileHover={{ scale: 1.3, filter: "brightness(1.5)" }}
-            className="cursor-pointer neo-brutalist-element"
+        {!isSmall && (
+          <HeroOrbit
+            size={getOrbitSize(550)}
+            rotation={20}
+            shouldOrbit
+            orbitDuration={isHovering ? 28 : 38}
+            shouldSpin
+            spinDuration={6}
           >
-            <StarIcon className="size-12 text-emerald-300 animate-glow" />
-          </motion.div>
-        </HeroOrbit>
+            <motion.div 
+              whileHover={{ scale: 1.3, filter: "brightness(1.5)" }}
+              className="cursor-pointer neo-brutalist-element"
+            >
+              <StarIcon className="size-12 md:size-10 sm:size-8 text-emerald-300 animate-glow" />
+            </motion.div>
+          </HeroOrbit>
+        )}
         
         <HeroOrbit
-          size={590}
+          size={getOrbitSize(590)}
           rotation={98}
           shouldOrbit
           orbitDuration={isHovering ? 32 : 42}
@@ -196,76 +233,80 @@ const OrbitAnimations = () => {
             whileHover={{ scale: 1.4, rotate: -45 }}
             className="cursor-pointer"
           >
-            <StarIcon className="size-8 text-blue-300 animate-glow-delayed" />
+            <StarIcon className="size-8 sm:size-5 text-blue-300 animate-glow-delayed" />
           </motion.div>
         </HeroOrbit>
         
         <HeroOrbit 
-          size={650} 
+          size={getOrbitSize(650)} 
           rotation={-5} 
           shouldOrbit 
           orbitDuration={isHovering ? 34 : 44}
         >
           <motion.div 
             whileHover={{ scale: 2.5 }}
-            className="size-3 rounded-full bg-purple-300/30 animate-pulse-fast cursor-pointer"
+            className="size-3 sm:size-2 rounded-full bg-purple-300/30 animate-pulse-fast cursor-pointer"
           />
         </HeroOrbit>
         
-        <HeroOrbit
-          size={710}
-          rotation={144}
-          shouldOrbit
-          orbitDuration={isHovering ? 36 : 46}
-          shouldSpin
-          spinDuration={3}
-        >
-          <motion.div 
-            whileHover={{ scale: 1.3, rotate: 90 }}
-            className="cursor-pointer"
+        {!isSmall && (
+          <HeroOrbit
+            size={getOrbitSize(710)}
+            rotation={144}
+            shouldOrbit
+            orbitDuration={isHovering ? 36 : 46}
+            shouldSpin
+            spinDuration={3}
           >
-            <SparkleIcon className="size-14 text-emerald-300/30 animate-twinkle" />
-          </motion.div>
-        </HeroOrbit>
+            <motion.div 
+              whileHover={{ scale: 1.3, rotate: 90 }}
+              className="cursor-pointer"
+            >
+              <SparkleIcon className="size-14 md:size-10 sm:size-8 text-emerald-300/30 animate-twinkle" />
+            </motion.div>
+          </HeroOrbit>
+        )}
         
         <HeroOrbit 
-          size={720} 
+          size={getOrbitSize(720)} 
           rotation={85} 
           shouldOrbit 
           orbitDuration={isHovering ? 38 : 48}
         >
           <motion.div 
             whileHover={{ scale: 2 }}
-            className="size-3 rounded-full bg-pink-300/40 animate-pulse-delayed cursor-pointer"
+            className="size-3 sm:size-2 rounded-full bg-pink-300/40 animate-pulse-delayed cursor-pointer"
           />
         </HeroOrbit>
         
-        <HeroOrbit
-          size={800}
-          rotation={-72}
-          shouldOrbit
-          orbitDuration={isHovering ? 40 : 50}
-          shouldSpin
-          spinDuration={8}
-        >
-          <motion.div 
-            whileHover={{ 
-              scale: 1.2, 
-              boxShadow: "0 0 20px rgba(52, 211, 153, 0.7)",
-              filter: "brightness(1.3)"
-            }}
-            className="cursor-pointer relative"
+        {!isMobile && (
+          <HeroOrbit
+            size={getOrbitSize(800)}
+            rotation={-72}
+            shouldOrbit
+            orbitDuration={isHovering ? 40 : 50}
+            shouldSpin
+            spinDuration={8}
           >
-            <StarIcon className="size-28 text-emerald-300 animate-glow-slow" />
-            <motion.div
-              className="absolute inset-0 bg-emerald-500/20 rounded-full"
-              animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.5, 0.2] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-          </motion.div>
-        </HeroOrbit>
+            <motion.div 
+              whileHover={{ 
+                scale: 1.2, 
+                boxShadow: "0 0 20px rgba(52, 211, 153, 0.7)",
+                filter: "brightness(1.3)"
+              }}
+              className="cursor-pointer relative"
+            >
+              <StarIcon className="size-28 md:size-20 text-emerald-300 animate-glow-slow" />
+              <motion.div
+                className="absolute inset-0 bg-emerald-500/20 rounded-full"
+                animate={{ scale: [1, 1.5, 1], opacity: [0.2, 0.5, 0.2] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+            </motion.div>
+          </HeroOrbit>
+        )}
         
-        {/* Neo-brutalist decorative block that follows cursor */}
+        {/* Neo-brutalist decorative block that follows cursor - hide on mobile */}
         <motion.div
           className="fixed hidden md:block w-12 h-12 border-4 border-teal-300 pointer-events-none mix-blend-screen"
           style={{ 
