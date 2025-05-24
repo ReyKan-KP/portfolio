@@ -14,7 +14,45 @@ const calistoga = Calistoga({
 
 export const metadata: Metadata = {
   title: "Kanishaka Pranjal | Portfolio",
-  description: "Kanishaka Pranjal's Portfolio",
+  description: "Kanishaka Pranjal's Portfolio - Full Stack Developer and Designer specialized in creating engaging digital experiences",
+  keywords: ["Kanishaka Pranjal", "Portfolio", "Web Developer", "Full Stack Developer", "Designer", "Developer"],
+  authors: [{ name: "Kanishaka Pranjal" }],
+  creator: "Kanishaka Pranjal",
+  publisher: "Kanishaka Pranjal",
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://portfolio-kanishaka-pranjal.vercel.app/",
+    title: "Kanishaka Pranjal | Portfolio",
+    description: "Kanishaka Pranjal's Portfolio - Full Stack Developer and Designer specialized in creating engaging digital experiences",
+    siteName: "Kanishaka Pranjal Portfolio",
+    images: [
+      {
+        url: "/images/preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Kanishaka Pranjal Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kanishaka Pranjal | Portfolio",
+    description: "Kanishaka Pranjal's Portfolio - Full Stack Developer and Designer",
+    images: ["/images/preview.png"],
+    creator: "@kanishakapranjal",
+  },
+  icons: {
+    icon: "/images/logo.ico",
+    apple: "/images/logo.ico",
+  },
+  verification: {
+    google: "verification_token",
+  },
+  alternates: {
+    canonical: "https://portfolio-kanishaka-pranjal.vercel.app/",
+  },
 };
 
 export default function RootLayout({
