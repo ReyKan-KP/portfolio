@@ -101,7 +101,7 @@ function SocialIcons() {
     <motion.div
       className="fixed md:top-1/2 md:left-5 md:left-8 lg:left-12 md:-translate-y-1/2 
                  sm:bottom-5 bottom-4   
-                 flex md:flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 md:gap-6 z-30 mx-auto sm:mx-0 sm:w-full "
+                 flex md:flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 md:gap-6 z-30 sm:mx-auto sm:mx-0 overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
